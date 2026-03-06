@@ -1,10 +1,10 @@
 namespace Expense_Tracker_Desktop
 {
-    public partial class Form1 : Form
+    public partial class App : Form
     {
         private Account _account;
         private FileStorageService _storage = new FileStorageService();
-        public Form1()
+        public App()
         {
             InitializeComponent();
             var loadedTransactions = _storage.LoadTransactions();
@@ -103,34 +103,46 @@ namespace Expense_Tracker_Desktop
         private void button3_Click(object sender, EventArgs e)
         {
             string description = txtDescription.Text;
-            decimal amount = decimal.Parse(txtAmount.Text);
+            if(!decimal.TryParse(txtAmount.Text, out decimal amount))
+            {
+                MessageBox.Show("Do pole pro částku musíš zadat platné číslo.", 
+                    "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             Category category = (Category)cmbCategory.SelectedItem;
             bool isIncome = chckIsIncome.Checked;
-
-            var transaction = new Transaction
+            try
             {
-                Description = description,
-                Amount = amount,
-                IsIncome = isIncome,
-                Category = category,
-                Date = DateTime.Now,
+                var transaction = new Transaction(description, amount, isIncome, category);
+                _account.Transactions.Add(transaction);
 
-            };
+                dgvTransactions.DataSource = null;
+                dgvTransactions.DataSource = _account.Transactions;
 
-            _account.Transactions.Add(transaction);
+                UpdateBalance();
+                FormatTable();
+                _storage.SaveTransactions(_account.Transactions);
 
-            dgvTransactions.DataSource = null;
-            dgvTransactions.DataSource = _account.Transactions;
+                txtDescription.Clear();
+                txtAmount.Clear();
+                chckIsIncome.Checked = false;
+            }
+            catch (Exception ex)
+            {
 
-            UpdateBalance();
-            FormatTable();
-
-            txtDescription.Clear();
-            txtAmount.Clear();
-            chckIsIncome.Checked = false;
-
-
+                MessageBox.Show(ex.Message, "Chyba při vytváření platby", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
+
+                
+                
+               
+                    
+           
+            
+         
+
+        
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
