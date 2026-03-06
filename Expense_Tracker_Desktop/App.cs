@@ -122,7 +122,7 @@ namespace Expense_Tracker_Desktop
                 UpdateBalance();
                 FormatTable();
                 _storage.SaveTransactions(_account.Transactions);
-
+                ToastForm.Show("Platba byla úspěšně přidána!", this);
                 txtDescription.Clear();
                 txtAmount.Clear();
                 chckIsIncome.Checked = false;
