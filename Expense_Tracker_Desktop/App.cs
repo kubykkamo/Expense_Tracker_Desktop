@@ -101,6 +101,10 @@ namespace Expense_Tracker_Desktop
         private bool VerifyTransaction(string desc, string amountText, bool isIncome, Category cat) 
         
         {
+            if (string.IsNullOrEmpty(desc)) 
+            {
+                throw new ArgumentException("Popis nesmí být prázdný.");
+            }
             if (!decimal.TryParse(txtAmount.Text, out decimal amount))
             {
                 throw new ArgumentException("Částka musí být platné číslo!");   
