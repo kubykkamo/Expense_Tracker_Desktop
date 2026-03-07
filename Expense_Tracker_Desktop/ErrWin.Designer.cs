@@ -1,6 +1,6 @@
 ﻿namespace Expense_Tracker_Desktop
 {
-    partial class SuccWin
+    partial class ErrWin
     {
         /// <summary>
         /// Required designer variable.
@@ -29,33 +29,33 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            lblSuccessMsg = new Label();
+            lblErrorMsg = new Label();
             fadeTimer = new System.Windows.Forms.Timer(components);
             SuspendLayout();
             // 
-            // lblSuccessMsg
+            // lblErrorMsg
             // 
-            lblSuccessMsg.Anchor = AnchorStyles.None;
-            lblSuccessMsg.AutoSize = true;
-            lblSuccessMsg.Font = new Font("Trebuchet MS", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            lblSuccessMsg.Location = new Point(12, 15);
-            lblSuccessMsg.Margin = new Padding(6, 0, 3, 0);
-            lblSuccessMsg.Name = "lblSuccessMsg";
-            lblSuccessMsg.Size = new Size(46, 18);
-            lblSuccessMsg.TabIndex = 0;
-            lblSuccessMsg.Text = "label1";
-            lblSuccessMsg.TextAlign = ContentAlignment.MiddleCenter;
-            lblSuccessMsg.Click += lblSuccessMsg_Click;
+            lblErrorMsg.Anchor = AnchorStyles.None;
+            lblErrorMsg.AutoSize = true;
+            lblErrorMsg.Font = new Font("Trebuchet MS", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            lblErrorMsg.Location = new Point(12, 15);
+            lblErrorMsg.Margin = new Padding(6, 0, 3, 0);
+            lblErrorMsg.Name = "lblErrorMsg";
+            lblErrorMsg.Size = new Size(46, 18);
+            lblErrorMsg.TabIndex = 0;
+            lblErrorMsg.Text = "label1";
+            lblErrorMsg.TextAlign = ContentAlignment.MiddleCenter;
+            lblErrorMsg.Click += lblErrorMsg_Click;
             // 
-            // ToastForm
+            // ErrWin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(128, 255, 128);
+            BackColor = Color.FromArgb(255, 128, 128);
             ClientSize = new Size(250, 50);
-            Controls.Add(lblSuccessMsg);
+            Controls.Add(lblErrorMsg);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "ToastForm";
+            Name = "ErrWin";
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.Manual;
             Text = "ToastForm";
@@ -66,7 +66,7 @@
 
         #endregion
 
-        private Label lblSuccessMsg;
+        private Label lblErrorMsg;
         private System.Windows.Forms.Timer fadeTimer;
     }
 }

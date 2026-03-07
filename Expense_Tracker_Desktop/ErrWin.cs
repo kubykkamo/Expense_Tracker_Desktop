@@ -8,13 +8,13 @@ using System.Windows.Forms;
 
 namespace Expense_Tracker_Desktop
 {
-    public partial class SuccWin : Form
+    public partial class ErrWin : Form
     {
-        private int _timer = 8;
-        public SuccWin(string msg)
+        private double _timer = 6;
+        public ErrWin(string msg)
         {
             InitializeComponent();
-            lblSuccessMsg.Text = msg;
+            lblErrorMsg.Text = msg;
 
             this.Opacity = 0.75;
             fadeTimer.Tick += fadeTimer_Tick;
@@ -26,12 +26,12 @@ namespace Expense_Tracker_Desktop
         {
             if (_timer > 0)
             {
-                _timer--;
+                _timer-= 0.5;
             }
 
             else
             {
-                this.Opacity -= 0.04;
+                this.Opacity -= 0.03;
 
                 if (this.Opacity <= 0)
                 {
@@ -48,7 +48,7 @@ namespace Expense_Tracker_Desktop
 
         public static void Show(string message, Form sender)
         {
-            var toast = new SuccWin(message);
+            var toast = new ErrWin(message);
 
             toast.StartPosition = FormStartPosition.Manual;
             toast.Location = new Point(
@@ -59,7 +59,7 @@ namespace Expense_Tracker_Desktop
             toast.Show(sender);
         }
 
-        private void lblSuccessMsg_Click(object sender, EventArgs e)
+        private void lblErrorMsg_Click(object sender, EventArgs e)
         {
 
         }

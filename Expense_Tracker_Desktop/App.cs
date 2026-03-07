@@ -98,39 +98,48 @@ namespace Expense_Tracker_Desktop
 
         }
 
+        private bool VerifyTransaction(string desc, string amountText, bool isIncome, Category cat) 
+        
+        {
+            if (!decimal.TryParse(txtAmount.Text, out decimal amount))
+            {
+                throw new ArgumentException("Částka musí být platné číslo!");   
+            }
+            
+            var transaction = new Transaction(desc, amount, isIncome, cat);
+            _account.Transactions.Add(transaction);
+            _storage.SaveTransactions(_account.Transactions);
+            
+           
+            return true;
+
+           
+        }
 
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string description = txtDescription.Text;
-            if(!decimal.TryParse(txtAmount.Text, out decimal amount))
-            {
-                MessageBox.Show("Do pole pro částku musíš zadat platné číslo.", 
-                    "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            Category category = (Category)cmbCategory.SelectedItem;
-            bool isIncome = chckIsIncome.Checked;
+           
             try
             {
-                var transaction = new Transaction(description, amount, isIncome, category);
-                _account.Transactions.Add(transaction);
+                VerifyTransaction(txtDescription.Text, txtAmount.Text, chckIsIncome.Checked, (Category)cmbCategory.SelectedItem);
+                SuccWin.Show("Platba byla úspěšně přidána!", this);
 
                 dgvTransactions.DataSource = null;
                 dgvTransactions.DataSource = _account.Transactions;
-
-                UpdateBalance();
-                FormatTable();
-                _storage.SaveTransactions(_account.Transactions);
-                ToastForm.Show("Platba byla úspěšně přidána!", this);
                 txtDescription.Clear();
                 txtAmount.Clear();
                 chckIsIncome.Checked = false;
+
+                UpdateBalance();
+                FormatTable();
+                
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message, "Chyba při vytváření platby", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrWin.Show(ex.Message, this);
+                
             }
         }
 
