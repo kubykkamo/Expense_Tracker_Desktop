@@ -41,9 +41,9 @@
             lblErrorMsg.Location = new Point(12, 15);
             lblErrorMsg.Margin = new Padding(6, 0, 3, 0);
             lblErrorMsg.Name = "lblErrorMsg";
-            lblErrorMsg.Size = new Size(46, 18);
+            lblErrorMsg.Size = new Size(90, 18);
             lblErrorMsg.TabIndex = 0;
-            lblErrorMsg.Text = "label1";
+            lblErrorMsg.Text = "ErrorMessage";
             lblErrorMsg.TextAlign = ContentAlignment.MiddleCenter;
             lblErrorMsg.Click += lblErrorMsg_Click;
             // 

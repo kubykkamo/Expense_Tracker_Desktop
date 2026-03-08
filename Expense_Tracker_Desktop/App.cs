@@ -14,6 +14,14 @@ namespace Expense_Tracker_Desktop
 
             _account = new Account(loadedTransactions, loadedCategories);
 
+            cmbSort.Items.Add(new SortOption { DisplayName = "Od nejdražší", Type = SortType.ByAmountDesc });
+            cmbSort.Items.Add(new SortOption { DisplayName = "Od nejlevnější", Type = SortType.ByAmountAsc });
+            cmbSort.Items.Add(new SortOption { DisplayName = "Podle abecedy A-Z", Type = SortType.ByNameAsc });
+            cmbSort.Items.Add(new SortOption { DisplayName = "Podle abecedy Z-A", Type = SortType.ByNameDesc });
+            cmbSort.Items.Add(new SortOption { DisplayName = "Od nejnvoější", Type = SortType.ByDateDesc });
+            cmbSort.Items.Add(new SortOption { DisplayName = "Od nejstarší", Type = SortType.ByDateAsc });
+
+            cmbSort.DisplayMember = "DisplayName";
 
             cmbCategory.DataSource = _account.Categories;
             cmbCategory.DisplayMember = "Name";
@@ -205,6 +213,7 @@ namespace Expense_Tracker_Desktop
 
         private void button4_Click(object sender, EventArgs e)
         {
+
             var transactions = _account.GetFilteredTransactions((Category)cmbCategoryFilter.SelectedItem);
 
             dgvTransactions.DataSource = transactions;
@@ -215,6 +224,24 @@ namespace Expense_Tracker_Desktop
         {
             UpdateData();
             FormatTable();
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            var selectedOption = (SortOption)cmbSort.SelectedItem;
+            var transactions = _account.GetSortedTransactions(selectedOption.Type);
+
+            dgvTransactions.DataSource = transactions;
         }
     }
 }

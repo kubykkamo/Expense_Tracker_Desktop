@@ -57,6 +57,21 @@ public class Account
 
     }
 
+    public List<Transaction> GetSortedTransactions(SortType sortType) 
+    {
+        return sortType switch
+        {
+            SortType.ByDateDesc => Transactions.OrderByDescending(t => t.Date).ToList(),
+            SortType.ByDateAsc => Transactions.OrderBy(t => t.Date).ToList(),
+            SortType.ByNameDesc => Transactions.OrderByDescending(t => t.Description).ToList(),
+            SortType.ByNameAsc => Transactions.OrderBy(t => t.Description).ToList(),
+            SortType.ByAmountDesc => Transactions.OrderByDescending(t => t.Amount).ToList(),
+            SortType.ByAmountAsc => Transactions.OrderBy(t => t.Amount).ToList(),
+            _=> Transactions.ToList()
+        };
+
+    }
+
     public List<Transaction> DateOrderedTransactions() 
     { 
         return Transactions

@@ -41,13 +41,13 @@
             lblSuccessMsg.Location = new Point(12, 15);
             lblSuccessMsg.Margin = new Padding(6, 0, 3, 0);
             lblSuccessMsg.Name = "lblSuccessMsg";
-            lblSuccessMsg.Size = new Size(46, 18);
+            lblSuccessMsg.Size = new Size(106, 18);
             lblSuccessMsg.TabIndex = 0;
-            lblSuccessMsg.Text = "label1";
+            lblSuccessMsg.Text = "SuccessMessage";
             lblSuccessMsg.TextAlign = ContentAlignment.MiddleCenter;
             lblSuccessMsg.Click += lblSuccessMsg_Click;
             // 
-            // ToastForm
+            // SuccWin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -55,7 +55,7 @@
             ClientSize = new Size(250, 50);
             Controls.Add(lblSuccessMsg);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "ToastForm";
+            Name = "SuccWin";
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.Manual;
             Text = "ToastForm";

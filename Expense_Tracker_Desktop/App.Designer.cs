@@ -32,8 +32,10 @@
             lblBalance = new Label();
             button1 = new Button();
             panelOverview = new Panel();
+            label4 = new Label();
+            cmbSort = new ComboBox();
+            button5 = new Button();
             button4 = new Button();
-            label5 = new Label();
             cmbCategoryFilter = new ComboBox();
             filtrovatPodleKategorie = new Label();
             panelAddTransaction = new Panel();
@@ -46,7 +48,7 @@
             chckIsIncome = new CheckBox();
             txtAmount = new TextBox();
             txtDescription = new TextBox();
-            button5 = new Button();
+            button6 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvTransactions).BeginInit();
             panelOverview.SuspendLayout();
             panelAddTransaction.SuspendLayout();
@@ -78,7 +80,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(519, 17);
+            button1.Location = new Point(680, 78);
             button1.Name = "button1";
             button1.Size = new Size(142, 46);
             button1.TabIndex = 2;
@@ -88,9 +90,11 @@
             // 
             // panelOverview
             // 
+            panelOverview.Controls.Add(button6);
+            panelOverview.Controls.Add(label4);
+            panelOverview.Controls.Add(cmbSort);
             panelOverview.Controls.Add(button5);
             panelOverview.Controls.Add(button4);
-            panelOverview.Controls.Add(label5);
             panelOverview.Controls.Add(cmbCategoryFilter);
             panelOverview.Controls.Add(filtrovatPodleKategorie);
             panelOverview.Controls.Add(dgvTransactions);
@@ -101,25 +105,44 @@
             panelOverview.Size = new Size(1195, 665);
             panelOverview.TabIndex = 3;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            label4.Location = new Point(998, 257);
+            label4.Name = "label4";
+            label4.Size = new Size(123, 23);
+            label4.TabIndex = 17;
+            label4.Text = "Filtrovat podle";
+            label4.Click += label4_Click_1;
+            // 
+            // cmbSort
+            // 
+            cmbSort.FormattingEnabled = true;
+            cmbSort.Location = new Point(998, 283);
+            cmbSort.Name = "cmbSort";
+            cmbSort.Size = new Size(121, 23);
+            cmbSort.TabIndex = 16;
+            // 
+            // button5
+            // 
+            button5.Location = new Point(874, 415);
+            button5.Name = "button5";
+            button5.Size = new Size(108, 25);
+            button5.TabIndex = 15;
+            button5.Text = "Reset";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
             // button4
             // 
-            button4.Location = new Point(680, 328);
+            button4.Location = new Point(680, 324);
             button4.Name = "button4";
             button4.Size = new Size(108, 25);
             button4.TabIndex = 14;
             button4.Text = "Filtrovat";
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            label5.Location = new Point(680, 257);
-            label5.Name = "label5";
-            label5.Size = new Size(84, 23);
-            label5.TabIndex = 13;
-            label5.Text = "Kategorie";
             // 
             // cmbCategoryFilter
             // 
@@ -134,7 +157,7 @@
             // 
             filtrovatPodleKategorie.AutoSize = true;
             filtrovatPodleKategorie.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            filtrovatPodleKategorie.Location = new Point(680, 215);
+            filtrovatPodleKategorie.Location = new Point(680, 257);
             filtrovatPodleKategorie.Name = "filtrovatPodleKategorie";
             filtrovatPodleKategorie.Size = new Size(203, 23);
             filtrovatPodleKategorie.TabIndex = 10;
@@ -246,15 +269,15 @@
             txtDescription.TabIndex = 1;
             txtDescription.TextChanged += textBox1_TextChanged;
             // 
-            // button5
+            // button6
             // 
-            button5.Location = new Point(874, 415);
-            button5.Name = "button5";
-            button5.Size = new Size(108, 25);
-            button5.TabIndex = 15;
-            button5.Text = "Reset";
-            button5.UseVisualStyleBackColor = true;
-            button5.Click += button5_Click;
+            button6.Location = new Point(1011, 324);
+            button6.Name = "button6";
+            button6.Size = new Size(108, 25);
+            button6.TabIndex = 18;
+            button6.Text = "Filtrovat";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
             // App
             // 
@@ -290,9 +313,11 @@
         private Label label3;
         private Label label2;
         private Label filtrovatPodleKategorie;
-        private Label label5;
         private ComboBox cmbCategoryFilter;
         private Button button4;
         private Button button5;
+        private ComboBox cmbSort;
+        private Label label4;
+        private Button button6;
     }
 }
