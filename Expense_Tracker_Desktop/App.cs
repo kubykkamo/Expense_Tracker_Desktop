@@ -7,19 +7,18 @@ namespace Expense_Tracker_Desktop
         public App()
         {
             InitializeComponent();
-            var loadedTransactions = _storage.LoadTransactions();
+            var loadedTransactions = _storage.LoadTransactions()
+                .OrderByDescending(x => x.Date)
+                .ToList();
             var loadedCategories = _storage.LoadCategories();
+
             _account = new Account(loadedTransactions, loadedCategories);
-            
+
 
             cmbCategory.DataSource = _account.Categories;
             cmbCategory.DisplayMember = "Name";
-            UpdateBalance();
+            UpdateData();
             FormatTable();
-
-
-
-
 
             dgvTransactions.DataBindingComplete += DgvTransactions_DataBindingComplete;
         }
@@ -34,14 +33,20 @@ namespace Expense_Tracker_Desktop
 
         }
 
+        
+
         private void label1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void UpdateBalance()
+
+
+        private void UpdateData()
         {
             lblBalance.Text = $"Celkový zůstatek: {_account.Balance} Kč.";
+            dgvTransactions.DataSource = null;
+            dgvTransactions.DataSource = _account.Transactions;
         }
 
         private void FormatTable()
@@ -71,11 +76,11 @@ namespace Expense_Tracker_Desktop
                 if (jePrijem)
                 {
 
-                    radek.DefaultCellStyle.BackColor = Color.LightGreen;
+                    radek.DefaultCellStyle.BackColor = Color.AliceBlue;
                 }
                 else
                 {
-                    radek.DefaultCellStyle.BackColor = Color.LightSalmon;
+                    radek.DefaultCellStyle.BackColor = Color.LightPink;
                 }
             }
         }
@@ -98,64 +103,82 @@ namespace Expense_Tracker_Desktop
 
         }
 
-        private bool VerifyTransaction(string desc, string amountText, bool isIncome, Category cat) 
-        
+        private void VerifyTransaction(string desc, string amountText, bool isIncome, Category cat)
+
         {
-            if (string.IsNullOrEmpty(desc)) 
+            if (string.IsNullOrEmpty(desc))
             {
                 throw new ArgumentException("Popis nesmí být prázdný.");
             }
-            if (!decimal.TryParse(txtAmount.Text, out decimal amount))
+            if (!decimal.TryParse(amountText, out decimal amount))
             {
-                throw new ArgumentException("Částka musí být platné číslo!");   
+                throw new ArgumentException("Částka musí být platné číslo!");
             }
-            
+
             var transaction = new Transaction(desc, amount, isIncome, cat);
             _account.Transactions.Add(transaction);
             _storage.SaveTransactions(_account.Transactions);
-            
-           
-            return true;
 
-           
+
+
+
+
         }
 
+        private void dgvTransactions_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (dgvTransactions.SelectedRows.Count > 0)
+                {
+                    var deletedTransaction = (Transaction)dgvTransactions.SelectedRows[0].DataBoundItem;
+
+                    _account.Transactions.Remove(deletedTransaction);
+                    _storage.SaveTransactions(_account.Transactions);
+
+                    
+
+                    UpdateData();
+                    FormatTable();
+                    SuccWin.Show("Platba byla smazána", this);
+                }
+            }
+        }
 
         private void button3_Click(object sender, EventArgs e)
         {
-           
+
             try
             {
                 VerifyTransaction(txtDescription.Text, txtAmount.Text, chckIsIncome.Checked, (Category)cmbCategory.SelectedItem);
                 SuccWin.Show("Platba byla úspěšně přidána!", this);
 
-                dgvTransactions.DataSource = null;
-                dgvTransactions.DataSource = _account.Transactions;
+                
                 txtDescription.Clear();
                 txtAmount.Clear();
                 chckIsIncome.Checked = false;
 
-                UpdateBalance();
+                UpdateData();
                 FormatTable();
-                
+
             }
             catch (Exception ex)
             {
 
                 ErrWin.Show(ex.Message, this);
-                
+
             }
         }
 
-                
-                
-               
-                    
-           
-            
-         
 
-        
+
+
+
+
+
+
+
+
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -176,5 +199,6 @@ namespace Expense_Tracker_Desktop
         {
 
         }
+
     }
 }

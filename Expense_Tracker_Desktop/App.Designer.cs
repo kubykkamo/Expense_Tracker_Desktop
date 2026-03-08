@@ -33,15 +33,15 @@
             button1 = new Button();
             panelOverview = new Panel();
             panelAddTransaction = new Panel();
+            label3 = new Label();
+            label2 = new Label();
+            label1 = new Label();
             button3 = new Button();
             button2 = new Button();
             cmbCategory = new ComboBox();
             chckIsIncome = new CheckBox();
             txtAmount = new TextBox();
             txtDescription = new TextBox();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvTransactions).BeginInit();
             panelOverview.SuspendLayout();
             panelAddTransaction.SuspendLayout();
@@ -49,12 +49,16 @@
             // 
             // dgvTransactions
             // 
+            dgvTransactions.AllowUserToAddRows = false;
             dgvTransactions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvTransactions.Location = new Point(165, 78);
+            dgvTransactions.MultiSelect = false;
             dgvTransactions.Name = "dgvTransactions";
+            dgvTransactions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvTransactions.Size = new Size(600, 390);
             dgvTransactions.TabIndex = 0;
             dgvTransactions.CellContentClick += dataGridView1_CellContentClick;
+            dgvTransactions.KeyDown += dgvTransactions_KeyDown_1;
             // 
             // lblBalance
             // 
@@ -102,6 +106,38 @@
             panelAddTransaction.Name = "panelAddTransaction";
             panelAddTransaction.Size = new Size(954, 505);
             panelAddTransaction.TabIndex = 4;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            label3.Location = new Point(165, 237);
+            label3.Name = "label3";
+            label3.Size = new Size(84, 23);
+            label3.TabIndex = 11;
+            label3.Text = "Kategorie";
+            label3.Click += label3_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            label2.Location = new Point(165, 164);
+            label2.Name = "label2";
+            label2.Size = new Size(63, 23);
+            label2.TabIndex = 10;
+            label2.Text = "Částka";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            label1.Location = new Point(165, 78);
+            label1.Name = "label1";
+            label1.Size = new Size(48, 23);
+            label1.TabIndex = 9;
+            label1.Text = "Popis";
+            label1.Click += label1_Click_1;
             // 
             // button3
             // 
@@ -160,46 +196,14 @@
             txtDescription.TabIndex = 1;
             txtDescription.TextChanged += textBox1_TextChanged;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            label1.Location = new Point(165, 78);
-            label1.Name = "label1";
-            label1.Size = new Size(48, 23);
-            label1.TabIndex = 9;
-            label1.Text = "Popis";
-            label1.Click += label1_Click_1;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            label2.Location = new Point(165, 164);
-            label2.Name = "label2";
-            label2.Size = new Size(63, 23);
-            label2.TabIndex = 10;
-            label2.Text = "Částka";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            label3.Location = new Point(165, 237);
-            label3.Name = "label3";
-            label3.Size = new Size(84, 23);
-            label3.TabIndex = 11;
-            label3.Text = "Kategorie";
-            label3.Click += label3_Click;
-            // 
-            // Form1
+            // App
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1055, 602);
             Controls.Add(panelOverview);
             Controls.Add(panelAddTransaction);
-            Name = "Form1";
+            Name = "App";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)dgvTransactions).EndInit();
             panelOverview.ResumeLayout(false);
