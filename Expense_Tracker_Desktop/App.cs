@@ -17,6 +17,8 @@ namespace Expense_Tracker_Desktop
 
             cmbCategory.DataSource = _account.Categories;
             cmbCategory.DisplayMember = "Name";
+            cmbCategoryFilter.DataSource = _account.Categories;
+            cmbCategoryFilter.DisplayMember = "Name";
             UpdateData();
             FormatTable();
 
@@ -33,7 +35,8 @@ namespace Expense_Tracker_Desktop
 
         }
 
-        
+
+
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -46,12 +49,12 @@ namespace Expense_Tracker_Desktop
         {
             lblBalance.Text = $"Celkový zůstatek: {_account.Balance} Kč.";
             dgvTransactions.DataSource = null;
-            dgvTransactions.DataSource = _account.Transactions;
+            dgvTransactions.DataSource = _account.DateOrderedTransactions();
         }
 
         private void FormatTable()
         {
-            dgvTransactions.DataSource = _account.Transactions;
+
             dgvTransactions.Columns["Category"].Visible = false;
             dgvTransactions.Columns["Description"].HeaderText = "Popis";
             dgvTransactions.Columns["Amount"].HeaderText = "Částka";
@@ -115,8 +118,7 @@ namespace Expense_Tracker_Desktop
                 throw new ArgumentException("Částka musí být platné číslo!");
             }
 
-            var transaction = new Transaction(desc, amount, isIncome, cat);
-            _account.Transactions.Add(transaction);
+            _account.AddTransaction(desc, amount, isIncome, cat);
             _storage.SaveTransactions(_account.Transactions);
 
 
@@ -136,7 +138,7 @@ namespace Expense_Tracker_Desktop
                     _account.Transactions.Remove(deletedTransaction);
                     _storage.SaveTransactions(_account.Transactions);
 
-                    
+
 
                     UpdateData();
                     FormatTable();
@@ -153,7 +155,7 @@ namespace Expense_Tracker_Desktop
                 VerifyTransaction(txtDescription.Text, txtAmount.Text, chckIsIncome.Checked, (Category)cmbCategory.SelectedItem);
                 SuccWin.Show("Platba byla úspěšně přidána!", this);
 
-                
+
                 txtDescription.Clear();
                 txtAmount.Clear();
                 chckIsIncome.Checked = false;
@@ -169,15 +171,6 @@ namespace Expense_Tracker_Desktop
 
             }
         }
-
-
-
-
-
-
-
-
-
 
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -200,5 +193,28 @@ namespace Expense_Tracker_Desktop
 
         }
 
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            var transactions = _account.GetFilteredTransactions((Category)cmbCategoryFilter.SelectedItem);
+
+            dgvTransactions.DataSource = transactions;
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            UpdateData();
+            FormatTable();
+        }
     }
 }

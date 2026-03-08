@@ -56,6 +56,13 @@ public class Account
 
 
     }
+
+    public List<Transaction> DateOrderedTransactions() 
+    { 
+        return Transactions
+            .OrderByDescending(t => t.Date)
+            .ToList();
+    }
     public List<Transaction> SortByIncome()
     {
         var transactions = Transactions
