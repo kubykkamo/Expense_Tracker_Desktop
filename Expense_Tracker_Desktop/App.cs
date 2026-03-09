@@ -1,3 +1,5 @@
+using System.Diagnostics.PerformanceData;
+
 namespace Expense_Tracker_Desktop
 {
     public partial class App : Form
@@ -18,15 +20,17 @@ namespace Expense_Tracker_Desktop
             cmbSort.Items.Add(new SortOption { DisplayName = "Od nejlevnější", Type = SortType.ByAmountAsc });
             cmbSort.Items.Add(new SortOption { DisplayName = "Podle abecedy A-Z", Type = SortType.ByNameAsc });
             cmbSort.Items.Add(new SortOption { DisplayName = "Podle abecedy Z-A", Type = SortType.ByNameDesc });
-            cmbSort.Items.Add(new SortOption { DisplayName = "Od nejnvoější", Type = SortType.ByDateDesc });
+            cmbSort.Items.Add(new SortOption { DisplayName = "Od nejnovější", Type = SortType.ByDateDesc });
             cmbSort.Items.Add(new SortOption { DisplayName = "Od nejstarší", Type = SortType.ByDateAsc });
 
             cmbSort.DisplayMember = "DisplayName";
 
-            cmbCategory.DataSource = _account.Categories;
-            cmbCategory.DisplayMember = "Name";
+            
             cmbCategoryFilter.DataSource = _account.Categories;
             cmbCategoryFilter.DisplayMember = "Name";
+            cmbCategoryFilter.SelectedIndex = -1;
+            cmbSort.SelectedIndex = -1;
+
             UpdateData();
             FormatTable();
 
@@ -224,8 +228,39 @@ namespace Expense_Tracker_Desktop
         {
             UpdateData();
             FormatTable();
+            cmbCategoryFilter.SelectedIndex = -1;
+            cmbSort.SelectedIndex = -1;
+            
         }
+        public void GenerateTestData()
+        {
+            int count = 500;
+            var random = new Random();
 
+            var transactions = _account.Transactions;
+
+            // Vezmeme kategorie, které už v aplikaci máš
+            var categories = _account.Categories;
+
+            for (int i = 0; i < count; i++)
+            {
+                var cat = categories[random.Next(categories.Count)];
+                bool isIncome = random.Next(0, 2) == 0;
+                decimal amount = random.Next(10, 5000);
+                string desc = $"Testovací platba č. {i + 1}";
+
+                // Vytvoříme transakci (využijeme tvůj konstruktor, co hlídá chyby)
+                var t = new Transaction(desc, amount, isIncome, cat);
+
+                // Náhodné datum v rozmezí posledních 30 dnů
+                t.Date = DateTime.Now.AddDays(-random.Next(0, 30));
+
+                transactions.Add(t);
+            }
+
+            _storage.SaveTransactions(transactions);
+            MessageBox.Show($"{count} testovacích transakcí vygenerováno!");
+        }
         private void label5_Click(object sender, EventArgs e)
         {
 
@@ -236,12 +271,34 @@ namespace Expense_Tracker_Desktop
 
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void SortTransactions_Click(object sender, EventArgs e)
         {
             var selectedOption = (SortOption)cmbSort.SelectedItem;
-            var transactions = _account.GetSortedTransactions(selectedOption.Type);
+            var transactions = _account.GetSortedTransactions(selectedOption.Type, _account.Transactions);
 
             dgvTransactions.DataSource = transactions;
+        }
+
+        private void TestData_Click(object sender, EventArgs e)
+        {
+            GenerateTestData();
+        }
+
+        private void TwoFilters_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var selectedCategory = (Category)cmbCategoryFilter.SelectedItem;
+                var selectedOption = (SortOption)cmbSort.SelectedItem;
+                var transactions = _account.GetFilteredSortedTransactions(selectedCategory, selectedOption.Type);
+                dgvTransactions.DataSource = transactions;
+            }
+
+            catch (Exception ex) 
+            {
+                ErrWin.Show(ex.Message, this);
+            }
+            
         }
     }
 }

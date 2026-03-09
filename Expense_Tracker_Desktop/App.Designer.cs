@@ -32,6 +32,8 @@
             lblBalance = new Label();
             button1 = new Button();
             panelOverview = new Panel();
+            button7 = new Button();
+            button6 = new Button();
             label4 = new Label();
             cmbSort = new ComboBox();
             button5 = new Button();
@@ -48,7 +50,7 @@
             chckIsIncome = new CheckBox();
             txtAmount = new TextBox();
             txtDescription = new TextBox();
-            button6 = new Button();
+            button8 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvTransactions).BeginInit();
             panelOverview.SuspendLayout();
             panelAddTransaction.SuspendLayout();
@@ -90,6 +92,8 @@
             // 
             // panelOverview
             // 
+            panelOverview.Controls.Add(button8);
+            panelOverview.Controls.Add(button7);
             panelOverview.Controls.Add(button6);
             panelOverview.Controls.Add(label4);
             panelOverview.Controls.Add(cmbSort);
@@ -105,11 +109,31 @@
             panelOverview.Size = new Size(1195, 665);
             panelOverview.TabIndex = 3;
             // 
+            // button7
+            // 
+            button7.Location = new Point(1053, 0);
+            button7.Name = "button7";
+            button7.Size = new Size(142, 46);
+            button7.TabIndex = 19;
+            button7.Text = "Test";
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += TestData_Click;
+            // 
+            // button6
+            // 
+            button6.Location = new Point(1024, 324);
+            button6.Name = "button6";
+            button6.Size = new Size(108, 25);
+            button6.TabIndex = 18;
+            button6.Text = "Filtrovat";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += SortTransactions_Click;
+            // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            label4.Location = new Point(998, 257);
+            label4.Location = new Point(1011, 257);
             label4.Name = "label4";
             label4.Size = new Size(123, 23);
             label4.TabIndex = 17;
@@ -119,14 +143,14 @@
             // cmbSort
             // 
             cmbSort.FormattingEnabled = true;
-            cmbSort.Location = new Point(998, 283);
+            cmbSort.Location = new Point(1011, 283);
             cmbSort.Name = "cmbSort";
             cmbSort.Size = new Size(121, 23);
             cmbSort.TabIndex = 16;
             // 
             // button5
             // 
-            button5.Location = new Point(874, 415);
+            button5.Location = new Point(680, 403);
             button5.Name = "button5";
             button5.Size = new Size(108, 25);
             button5.TabIndex = 15;
@@ -269,15 +293,15 @@
             txtDescription.TabIndex = 1;
             txtDescription.TextChanged += textBox1_TextChanged;
             // 
-            // button6
+            // button8
             // 
-            button6.Location = new Point(1011, 324);
-            button6.Name = "button6";
-            button6.Size = new Size(108, 25);
-            button6.TabIndex = 18;
-            button6.Text = "Filtrovat";
-            button6.UseVisualStyleBackColor = true;
-            button6.Click += button6_Click;
+            button8.Location = new Point(850, 356);
+            button8.Name = "button8";
+            button8.Size = new Size(123, 29);
+            button8.TabIndex = 20;
+            button8.Text = "Použít oba filtry";
+            button8.UseVisualStyleBackColor = true;
+            button8.Click += TwoFilters_Click;
             // 
             // App
             // 
@@ -319,5 +343,7 @@
         private ComboBox cmbSort;
         private Label label4;
         private Button button6;
+        private Button button7;
+        private Button button8;
     }
 }

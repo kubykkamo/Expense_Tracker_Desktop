@@ -38,13 +38,14 @@
             lblErrorMsg.Anchor = AnchorStyles.None;
             lblErrorMsg.AutoSize = true;
             lblErrorMsg.Font = new Font("Trebuchet MS", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            lblErrorMsg.Location = new Point(12, 15);
+            lblErrorMsg.ImageAlign = ContentAlignment.MiddleLeft;
+            lblErrorMsg.Location = new Point(15, 9);
             lblErrorMsg.Margin = new Padding(6, 0, 3, 0);
             lblErrorMsg.Name = "lblErrorMsg";
             lblErrorMsg.Size = new Size(90, 18);
             lblErrorMsg.TabIndex = 0;
             lblErrorMsg.Text = "ErrorMessage";
-            lblErrorMsg.TextAlign = ContentAlignment.MiddleCenter;
+            lblErrorMsg.TextAlign = ContentAlignment.TopCenter;
             lblErrorMsg.Click += lblErrorMsg_Click;
             // 
             // ErrWin
@@ -52,7 +53,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(255, 128, 128);
-            ClientSize = new Size(250, 50);
+            ClientSize = new Size(432, 38);
             Controls.Add(lblErrorMsg);
             FormBorderStyle = FormBorderStyle.None;
             Name = "ErrWin";

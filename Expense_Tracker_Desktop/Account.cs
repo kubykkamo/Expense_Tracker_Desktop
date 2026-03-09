@@ -57,17 +57,19 @@ public class Account
 
     }
 
-    public List<Transaction> GetSortedTransactions(SortType sortType) 
+    public List<Transaction> GetSortedTransactions(SortType sortType, List<Transaction> t) 
     {
+       
         return sortType switch
         {
-            SortType.ByDateDesc => Transactions.OrderByDescending(t => t.Date).ToList(),
-            SortType.ByDateAsc => Transactions.OrderBy(t => t.Date).ToList(),
-            SortType.ByNameDesc => Transactions.OrderByDescending(t => t.Description).ToList(),
-            SortType.ByNameAsc => Transactions.OrderBy(t => t.Description).ToList(),
-            SortType.ByAmountDesc => Transactions.OrderByDescending(t => t.Amount).ToList(),
-            SortType.ByAmountAsc => Transactions.OrderBy(t => t.Amount).ToList(),
-            _=> Transactions.ToList()
+            SortType.ByDateDesc => t.OrderByDescending(t => t.Date).ToList(),
+            SortType.ByDateAsc => t.OrderBy(t => t.Date).ToList(),
+            SortType.ByNameDesc => t.OrderByDescending(t => t.Description).ToList(),
+            SortType.ByNameAsc => t.OrderBy(t => t.Description).ToList(),
+            SortType.ByAmountDesc => t.OrderByDescending(t => t.Amount).ToList(),
+            SortType.ByAmountAsc => t.OrderBy(t => t.Amount).ToList(),
+            _=> t.ToList()
+            
         };
 
     }
@@ -78,20 +80,29 @@ public class Account
             .OrderByDescending(t => t.Date)
             .ToList();
     }
-    public List<Transaction> SortByIncome()
-    {
-        var transactions = Transactions
-            .GroupBy(t => t.IsIncome)
-            .SelectMany(g => g.OrderByDescending(t => t.Date))
-            .ToList();
-        return transactions;
-    }
 
     public List <Transaction> GetFilteredTransactions(Category category)
     {
-        return Transactions
+        var transactions = Transactions
             .Where(t => t.Category == category)
             .OrderByDescending(t => t.Date)
             .ToList();
+
+        if (!transactions.Any()) 
+        {
+            throw new ArgumentException("Zvolené kategorii neodpovídají žádné transakce!");
+        }
+
+        return transactions;
+    }
+
+    public List<Transaction> GetFilteredSortedTransactions(Category category, SortType sortType) 
+    {
+        var catTransactions = GetFilteredTransactions(category);
+
+        var sortedTransactions = GetSortedTransactions(sortType, catTransactions);
+
+        return sortedTransactions;
+
     }
 }
