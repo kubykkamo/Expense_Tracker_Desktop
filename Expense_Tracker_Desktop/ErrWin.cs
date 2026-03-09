@@ -49,12 +49,23 @@ namespace Expense_Tracker_Desktop
         public static void Show(string message, Form sender)
         {
             var toast = new ErrWin(message);
-
             toast.StartPosition = FormStartPosition.Manual;
+
+            int openToasts = 0;
+            foreach (Form f in Application.OpenForms)
+            {
+                // Počítáme oba typy, aby se nekrývaly
+                if (f is ErrWin || f is SuccWin) openToasts++;
+            }
+
+            // Výpočet pozice - všimni si toho MÍNUS u offsetu
+            // (openToasts - 1) * (vyska + mezera)
+            int offset = (openToasts - 1) * (toast.Height + 5);
+
             toast.Location = new Point(
                 sender.Location.X + sender.Width - toast.Width - 20,
-                sender.Location.Y + sender.Height - toast.Height - 20
-                );
+                sender.Location.Y + sender.Height - toast.Height - 60 - offset // TADY odečítáme, jdeme NAHORU
+            );
 
             toast.Show(sender);
         }
