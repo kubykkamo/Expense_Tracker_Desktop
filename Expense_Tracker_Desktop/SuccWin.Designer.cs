@@ -35,13 +35,12 @@
             // 
             // lblSuccessMsg
             // 
-            lblSuccessMsg.Anchor = AnchorStyles.None;
-            lblSuccessMsg.AutoSize = true;
+            lblSuccessMsg.Dock = DockStyle.Fill;
             lblSuccessMsg.Font = new Font("Trebuchet MS", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            lblSuccessMsg.Location = new Point(12, 15);
+            lblSuccessMsg.Location = new Point(0, 0);
             lblSuccessMsg.Margin = new Padding(6, 0, 3, 0);
             lblSuccessMsg.Name = "lblSuccessMsg";
-            lblSuccessMsg.Size = new Size(106, 18);
+            lblSuccessMsg.Size = new Size(250, 50);
             lblSuccessMsg.TabIndex = 0;
             lblSuccessMsg.Text = "SuccessMessage";
             lblSuccessMsg.TextAlign = ContentAlignment.MiddleCenter;
@@ -61,7 +60,6 @@
             Text = "ToastForm";
             Load += ToastForm_Load;
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
