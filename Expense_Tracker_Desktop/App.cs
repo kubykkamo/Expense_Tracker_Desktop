@@ -288,9 +288,19 @@ namespace Expense_Tracker_Desktop
         {
             try
             {
-                var selectedCategory = (Category)cmbCategoryFilter.SelectedItem;
-                var selectedOption = (SortOption)cmbSort.SelectedItem;
-                var transactions = _account.GetFilteredSortedTransactions(selectedCategory, selectedOption.Type);
+                var selectedCategory = cmbCategoryFilter.SelectedItem as Category;
+                var selectedOption = cmbSort.SelectedItem as SortOption;
+                SortType type = SortType.ByDateDesc;
+                if (selectedOption != null) 
+                {
+                    type = selectedOption.Type;
+                }
+                else 
+                {
+                    ErrWin.Show("Nevybral/a jsi druhý filtr!", this);
+                }
+
+                var transactions = _account.GetFilteredSortedTransactions(selectedCategory, type);
                 dgvTransactions.DataSource = transactions;
             }
 
