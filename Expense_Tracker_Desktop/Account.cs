@@ -47,7 +47,7 @@ public class Account
         .Sum(t => t.Amount);
     public decimal Balance => TotalIncome - TotalOutcome;
 
-
+    
 
     public Account(List<Transaction> transactions, List<Category> categories)
     {
@@ -89,14 +89,16 @@ public class Account
 
     public List <Transaction> GetFilteredTransactions(Category category)
     {
+        
+        
         var transactions = Transactions
             .Where(t => t.Category == category)
             .OrderByDescending(t => t.Date)
             .ToList();
 
-        if (!transactions.Any()) 
+       if(transactions.Count == 0) 
         {
-            throw new ArgumentException("Zvolené kategorii neodpovídají žádné transakce!");
+            throw new ArgumentException("Zvolené kategorii neodpovídají žádné transkace!");
         }
 
         return transactions;
@@ -111,4 +113,6 @@ public class Account
         return sortedTransactions;
 
     }
+
+ 
 }

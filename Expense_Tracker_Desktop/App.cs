@@ -18,7 +18,7 @@ namespace Expense_Tracker_Desktop
             loadedCategories = _storage.LoadCategories();
 
             _account = new Account(loadedTransactions, loadedCategories);
-
+// Combo boxes --------------------------
             cmbSort.Items.Add(new SortOption { DisplayName = "Od nejdražší", Type = SortType.ByAmountDesc });
             cmbSort.Items.Add(new SortOption { DisplayName = "Od nejlevnější", Type = SortType.ByAmountAsc });
             cmbSort.Items.Add(new SortOption { DisplayName = "Podle abecedy A-Z", Type = SortType.ByNameAsc });
@@ -27,17 +27,41 @@ namespace Expense_Tracker_Desktop
             cmbSort.Items.Add(new SortOption { DisplayName = "Od nejstarší", Type = SortType.ByDateAsc });
 
             cmbSort.DisplayMember = "DisplayName";
-
-
+ 
             cmbCategoryFilter.DataSource = _account.Categories;
             cmbCategoryFilter.DisplayMember = "Name";
             cmbCategoryFilter.SelectedIndex = -1;
             cmbSort.SelectedIndex = -1;
 
             UpdateData();
-            FormatTable();
+            
             ShowPanel(panelOverview);
 
+           
+            // 1. Roztáhnutí sloupců přes celou šířku okna
+            dgvTransactions.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvTransactions.EnableHeadersVisualStyles = false;
+            // 2. Skrytí toho ošklivého prázdného sloupečku úplně vlevo
+            dgvTransactions.RowHeadersVisible = false;
+
+            // 3. Odstranění svislých čar (necháme jen jemné vodorovné pro oddělení řádků)
+            dgvTransactions.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvTransactions.GridColor = Color.FromArgb(230, 230, 230); // Velmi světle šedá čára
+
+            // 4. Větší výška řádků, aby text nebyl tak namačkaný (tabulka bude dýchat)
+            dgvTransactions.RowTemplate.Height = 40;
+
+           
+            dgvTransactions.DefaultCellStyle.SelectionBackColor = Color.FromArgb(220, 226, 230);
+            dgvTransactions.DefaultCellStyle.SelectionForeColor = Color.Black;
+          
+            
+            dgvTransactions.EnableHeadersVisualStyles = false;
+            dgvTransactions.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvTransactions.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(245, 247, 250);
+            dgvTransactions.ColumnHeadersDefaultCellStyle.Font = new Font(dgvTransactions.Font, FontStyle.Bold);
+            dgvTransactions.ColumnHeadersHeight = 45;
+            FormatTable();
             dgvTransactions.DataBindingComplete += DgvTransactions_DataBindingComplete;
         }
 
@@ -66,6 +90,7 @@ namespace Expense_Tracker_Desktop
 
         private void UpdateData()
         {
+            lblTotalOutcome.Text = $"Celková utrata {_account.TotalOutcome} Kč.";
             lblBalance.Text = $"Celkový zůstatek: {_account.Balance} Kč.";
             dgvTransactions.DataSource = null;
             dgvTransactions.DataSource = _account.DateOrderedTransactions();
@@ -78,13 +103,37 @@ namespace Expense_Tracker_Desktop
         private void FormatTable()
         {
 
+            // 1. Základní nastavení viditelnosti a textů
             dgvTransactions.Columns["Category"].Visible = false;
+            dgvTransactions.Columns["IsIncome"].Visible = false;
+
             dgvTransactions.Columns["Description"].HeaderText = "Popis";
             dgvTransactions.Columns["Amount"].HeaderText = "Částka";
             dgvTransactions.Columns["Date"].HeaderText = "Datum";
-            dgvTransactions.Columns["IsIncome"].HeaderText = "Příjem?";
             dgvTransactions.Columns["CategoryName"].HeaderText = "Kategorie";
 
+            // 2. Globální zarovnání (všechno na střed)
+            dgvTransactions.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvTransactions.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // 3. Specifické výjimky (přebijí to globální nastavení)
+
+            // POPIS DOLEVA
+            dgvTransactions.Columns["Description"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvTransactions.Columns["Description"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+            // ČÁSTKA DOPRAVA + PADDING
+            dgvTransactions.Columns["Amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvTransactions.Columns["Amount"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvTransactions.Columns["Amount"].DefaultCellStyle.Padding = new Padding(0, 0, 50, 0);
+            dgvTransactions.Columns["Amount"].HeaderCell.Style.Padding = new Padding(0, 0, 40, 0);
+
+            // KATEGORIE (Ujisti se, že používáš "CategoryName"!)
+            dgvTransactions.Columns["CategoryName"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvTransactions.Columns["CategoryName"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // ... zbytek tvého kódu s barvami a znaménky
+        
 
             DateTime? lastDate = null;
             bool useAlternateColor = false;
@@ -215,9 +264,17 @@ namespace Expense_Tracker_Desktop
         private void button4_Click(object sender, EventArgs e)
         {
 
-            var transactions = _account.GetFilteredTransactions((Category)cmbCategoryFilter.SelectedItem);
+            try
+            {
+                var transactions = _account.GetFilteredTransactions((Category)cmbCategoryFilter.SelectedItem);
 
-            dgvTransactions.DataSource = transactions;
+                dgvTransactions.DataSource = transactions;
+            }
+
+            catch (ArgumentException ex)
+            {
+                ErrWin.Show(ex.Message, this);
+            }
 
         }
 
@@ -270,11 +327,21 @@ namespace Expense_Tracker_Desktop
 
         private void SortTransactions_Click(object sender, EventArgs e)
         {
-            var selectedOption = (SortOption)cmbSort.SelectedItem;
-            var transactions = _account.GetSortedTransactions(selectedOption.Type, _account.Transactions);
+            
+                var selectedOption = cmbSort.SelectedItem as SortOption;
+                if (selectedOption == null) 
+                {
+                    ErrWin.Show("Nebyl vybrán žádný filtr!", this);
+                    return;
+                }
 
-            dgvTransactions.DataSource = transactions;
+                var transactions = _account.GetSortedTransactions(selectedOption.Type, _account.Transactions);
+
+                dgvTransactions.DataSource = transactions;
         }
+
+            
+        
 
         private void TestData_Click(object sender, EventArgs e)
         {

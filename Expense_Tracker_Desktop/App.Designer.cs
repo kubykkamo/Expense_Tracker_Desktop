@@ -32,6 +32,12 @@
             lblBalance = new Label();
             button1 = new Button();
             panelOverview = new Panel();
+            panelNewCat = new Panel();
+            button11 = new Button();
+            txtNewCat = new TextBox();
+            button9 = new Button();
+            label5 = new Label();
+            lblTotalOutcome = new Label();
             button10 = new Button();
             button8 = new Button();
             button7 = new Button();
@@ -52,15 +58,10 @@
             chckIsIncome = new CheckBox();
             txtAmount = new TextBox();
             txtDescription = new TextBox();
-            panelNewCat = new Panel();
-            button11 = new Button();
-            txtNewCat = new TextBox();
-            button9 = new Button();
-            label5 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvTransactions).BeginInit();
             panelOverview.SuspendLayout();
-            panelAddTransaction.SuspendLayout();
             panelNewCat.SuspendLayout();
+            panelAddTransaction.SuspendLayout();
             SuspendLayout();
             // 
             // dgvTransactions
@@ -81,7 +82,7 @@
             // 
             lblBalance.AutoSize = true;
             lblBalance.Font = new Font("Sitka Display", 14.2499981F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            lblBalance.Location = new Point(97, 23);
+            lblBalance.Location = new Point(39, 23);
             lblBalance.Name = "lblBalance";
             lblBalance.Size = new Size(74, 28);
             lblBalance.TabIndex = 1;
@@ -99,6 +100,8 @@
             // 
             // panelOverview
             // 
+            panelOverview.Controls.Add(panelNewCat);
+            panelOverview.Controls.Add(lblTotalOutcome);
             panelOverview.Controls.Add(button10);
             panelOverview.Controls.Add(button8);
             panelOverview.Controls.Add(button7);
@@ -116,6 +119,66 @@
             panelOverview.Name = "panelOverview";
             panelOverview.Size = new Size(1195, 665);
             panelOverview.TabIndex = 3;
+            // 
+            // panelNewCat
+            // 
+            panelNewCat.Controls.Add(button11);
+            panelNewCat.Controls.Add(txtNewCat);
+            panelNewCat.Controls.Add(button9);
+            panelNewCat.Controls.Add(label5);
+            panelNewCat.Location = new Point(453, 268);
+            panelNewCat.Margin = new Padding(3, 2, 3, 2);
+            panelNewCat.Name = "panelNewCat";
+            panelNewCat.Size = new Size(391, 160);
+            panelNewCat.TabIndex = 24;
+            // 
+            // button11
+            // 
+            button11.BackColor = SystemColors.ActiveBorder;
+            button11.Location = new Point(32, 108);
+            button11.Name = "button11";
+            button11.Size = new Size(108, 36);
+            button11.TabIndex = 23;
+            button11.Text = "Zpět";
+            button11.UseVisualStyleBackColor = false;
+            button11.Click += Overview_Click;
+            // 
+            // txtNewCat
+            // 
+            txtNewCat.Location = new Point(32, 55);
+            txtNewCat.Name = "txtNewCat";
+            txtNewCat.Size = new Size(181, 23);
+            txtNewCat.TabIndex = 22;
+            // 
+            // button9
+            // 
+            button9.Location = new Point(247, 108);
+            button9.Name = "button9";
+            button9.Size = new Size(108, 36);
+            button9.TabIndex = 21;
+            button9.Text = "Přidat";
+            button9.UseVisualStyleBackColor = true;
+            button9.Click += button9_Click;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            label5.Location = new Point(32, 30);
+            label5.Name = "label5";
+            label5.Size = new Size(138, 23);
+            label5.TabIndex = 21;
+            label5.Text = "Název kategorie";
+            // 
+            // lblTotalOutcome
+            // 
+            lblTotalOutcome.AutoSize = true;
+            lblTotalOutcome.Font = new Font("Sitka Display", 14.2499981F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            lblTotalOutcome.Location = new Point(453, 23);
+            lblTotalOutcome.Name = "lblTotalOutcome";
+            lblTotalOutcome.Size = new Size(74, 28);
+            lblTotalOutcome.TabIndex = 23;
+            lblTotalOutcome.Text = "Balance";
             // 
             // button10
             // 
@@ -161,7 +224,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            label4.Location = new Point(1011, 257);
+            label4.Location = new Point(1023, 257);
             label4.Name = "label4";
             label4.Size = new Size(123, 23);
             label4.TabIndex = 17;
@@ -203,7 +266,6 @@
             cmbCategoryFilter.Name = "cmbCategoryFilter";
             cmbCategoryFilter.Size = new Size(121, 23);
             cmbCategoryFilter.TabIndex = 12;
-            
             // 
             // filtrovatPodleKategorie
             // 
@@ -214,7 +276,6 @@
             filtrovatPodleKategorie.Size = new Size(203, 23);
             filtrovatPodleKategorie.TabIndex = 10;
             filtrovatPodleKategorie.Text = "Filtrovat podle kategorie";
-            
             // 
             // panelAddTransaction
             // 
@@ -241,7 +302,6 @@
             label3.Size = new Size(84, 23);
             label3.TabIndex = 11;
             label3.Text = "Kategorie";
-            
             // 
             // label2
             // 
@@ -292,7 +352,6 @@
             cmbCategory.Name = "cmbCategory";
             cmbCategory.Size = new Size(121, 23);
             cmbCategory.TabIndex = 6;
-           
             // 
             // chckIsIncome
             // 
@@ -303,7 +362,6 @@
             chckIsIncome.TabIndex = 5;
             chckIsIncome.Text = "Příjem?";
             chckIsIncome.UseVisualStyleBackColor = true;
-            
             // 
             // txtAmount
             // 
@@ -319,62 +377,11 @@
             txtDescription.Size = new Size(334, 23);
             txtDescription.TabIndex = 1;
             // 
-            // panelNewCat
-            // 
-            panelNewCat.Controls.Add(button11);
-            panelNewCat.Controls.Add(txtNewCat);
-            panelNewCat.Controls.Add(button9);
-            panelNewCat.Controls.Add(label5);
-            panelNewCat.Location = new Point(455, 295);
-            panelNewCat.Margin = new Padding(3, 2, 3, 2);
-            panelNewCat.Name = "panelNewCat";
-            panelNewCat.Size = new Size(391, 160);
-            panelNewCat.TabIndex = 24;
-            // 
-            // button11
-            // 
-            button11.BackColor = SystemColors.ActiveBorder;
-            button11.Location = new Point(32, 108);
-            button11.Name = "button11";
-            button11.Size = new Size(108, 36);
-            button11.TabIndex = 23;
-            button11.Text = "Zpět";
-            button11.UseVisualStyleBackColor = false;
-            button11.Click += Overview_Click;
-            // 
-            // txtNewCat
-            // 
-            txtNewCat.Location = new Point(32, 55);
-            txtNewCat.Name = "txtNewCat";
-            txtNewCat.Size = new Size(181, 23);
-            txtNewCat.TabIndex = 22;
-            // 
-            // button9
-            // 
-            button9.Location = new Point(247, 108);
-            button9.Name = "button9";
-            button9.Size = new Size(108, 36);
-            button9.TabIndex = 21;
-            button9.Text = "Přidat";
-            button9.UseVisualStyleBackColor = true;
-            button9.Click += button9_Click;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            label5.Location = new Point(32, 30);
-            label5.Name = "label5";
-            label5.Size = new Size(138, 23);
-            label5.TabIndex = 21;
-            label5.Text = "Název kategorie";
-            // 
             // App
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1300, 749);
-            Controls.Add(panelNewCat);
             Controls.Add(panelOverview);
             Controls.Add(panelAddTransaction);
             Name = "App";
@@ -382,10 +389,10 @@
             ((System.ComponentModel.ISupportInitialize)dgvTransactions).EndInit();
             panelOverview.ResumeLayout(false);
             panelOverview.PerformLayout();
-            panelAddTransaction.ResumeLayout(false);
-            panelAddTransaction.PerformLayout();
             panelNewCat.ResumeLayout(false);
             panelNewCat.PerformLayout();
+            panelAddTransaction.ResumeLayout(false);
+            panelAddTransaction.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -420,5 +427,6 @@
         private TextBox txtNewCat;
         private Button button9;
         private Label label5;
+        private Label lblTotalOutcome;
     }
 }
