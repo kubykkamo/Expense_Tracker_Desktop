@@ -86,7 +86,6 @@
             lblBalance.Size = new Size(74, 28);
             lblBalance.TabIndex = 1;
             lblBalance.Text = "Balance";
-            lblBalance.Click += label1_Click;
             // 
             // button1
             // 
@@ -204,7 +203,7 @@
             cmbCategoryFilter.Name = "cmbCategoryFilter";
             cmbCategoryFilter.Size = new Size(121, 23);
             cmbCategoryFilter.TabIndex = 12;
-            cmbCategoryFilter.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            
             // 
             // filtrovatPodleKategorie
             // 
@@ -215,7 +214,7 @@
             filtrovatPodleKategorie.Size = new Size(203, 23);
             filtrovatPodleKategorie.TabIndex = 10;
             filtrovatPodleKategorie.Text = "Filtrovat podle kategorie";
-            filtrovatPodleKategorie.Click += label4_Click;
+            
             // 
             // panelAddTransaction
             // 
@@ -242,7 +241,7 @@
             label3.Size = new Size(84, 23);
             label3.TabIndex = 11;
             label3.Text = "Kategorie";
-            label3.Click += label3_Click;
+            
             // 
             // label2
             // 
@@ -263,7 +262,6 @@
             label1.Size = new Size(48, 23);
             label1.TabIndex = 9;
             label1.Text = "Popis";
-            label1.Click += label1_Click_1;
             // 
             // button3
             // 
@@ -294,7 +292,7 @@
             cmbCategory.Name = "cmbCategory";
             cmbCategory.Size = new Size(121, 23);
             cmbCategory.TabIndex = 6;
-            cmbCategory.SelectedIndexChanged += txtCategory_SelectedIndexChanged;
+           
             // 
             // chckIsIncome
             // 
@@ -305,7 +303,7 @@
             chckIsIncome.TabIndex = 5;
             chckIsIncome.Text = "Příjem?";
             chckIsIncome.UseVisualStyleBackColor = true;
-            chckIsIncome.CheckedChanged += checkBox1_CheckedChanged;
+            
             // 
             // txtAmount
             // 
@@ -320,7 +318,6 @@
             txtDescription.Name = "txtDescription";
             txtDescription.Size = new Size(334, 23);
             txtDescription.TabIndex = 1;
-            txtDescription.TextChanged += textBox1_TextChanged;
             // 
             // panelNewCat
             // 

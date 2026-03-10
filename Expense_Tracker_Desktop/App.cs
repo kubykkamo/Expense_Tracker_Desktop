@@ -64,14 +64,6 @@ namespace Expense_Tracker_Desktop
             panelToShow.BringToFront();
         }
 
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-
         private void UpdateData()
         {
             lblBalance.Text = $"Celkový zůstatek: {_account.Balance} Kč.";
@@ -93,29 +85,40 @@ namespace Expense_Tracker_Desktop
             dgvTransactions.Columns["IsIncome"].HeaderText = "Příjem?";
             dgvTransactions.Columns["CategoryName"].HeaderText = "Kategorie";
 
-            if (dgvTransactions.Columns["Amount"] != null)
+
+            DateTime? lastDate = null;
+            bool useAlternateColor = false;
+
+            Color dayColorA = Color.White;
+            Color dayColorB = Color.FromArgb(255, 223, 211);
+
+            foreach (DataGridViewRow row in dgvTransactions.Rows)
             {
+                if (row.IsNewRow) continue;
 
-                dgvTransactions.Columns["Amount"].DefaultCellStyle.Format = "C0";
-            }
+                DateTime currentDate = Convert.ToDateTime(row.Cells["Date"].Value);
+                bool isIncome = (bool)row.Cells["IsIncome"].Value;
 
-
-            foreach (DataGridViewRow radek in dgvTransactions.Rows)
-            {
-                if (radek.IsNewRow) continue;
-
-
-                bool jePrijem = (bool)radek.Cells["IsIncome"].Value;
-
-                if (jePrijem)
+                // Střídání barev podle dnů
+                if (lastDate.HasValue && currentDate.Date != lastDate.Value.Date)
                 {
+                    useAlternateColor = !useAlternateColor;
+                }
 
-                    radek.DefaultCellStyle.BackColor = Color.AliceBlue;
+                row.DefaultCellStyle.BackColor = useAlternateColor ? dayColorB : dayColorA;
+                row.DefaultCellStyle.ForeColor = Color.Black; // Všechno písmo čistě černé
+
+                // Znaménka pro částku (nastaví se formát jen pro konkrétní buňku)
+                if (isIncome)
+                {
+                    row.Cells["Amount"].Style.Format = "+ #,##0 Kč";
                 }
                 else
                 {
-                    radek.DefaultCellStyle.BackColor = Color.LightPink;
+                    row.Cells["Amount"].Style.Format = "- #,##0 Kč";
                 }
+
+                lastDate = currentDate.Date;
             }
         }
 
@@ -130,10 +133,6 @@ namespace Expense_Tracker_Desktop
             ShowPanel(panelOverview);
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void VerifyTransaction(string desc, string amountText, bool isIncome, Category cat)
 
@@ -212,36 +211,6 @@ namespace Expense_Tracker_Desktop
             }
         }
 
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtCategory_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -336,11 +305,6 @@ namespace Expense_Tracker_Desktop
             {
                 ErrWin.Show(ex.Message, this);
             }
-
-        }
-
-        private void label5_Click_1(object sender, EventArgs e)
-        {
 
         }
 
