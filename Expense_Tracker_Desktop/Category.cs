@@ -25,6 +25,15 @@ public class Category {
         isIncome = income;
         Limit = limit;
     }
+
+    public Category(string description) 
+    {
+        if (string.IsNullOrWhiteSpace(description)) 
+        {
+            throw new ArgumentException("Nebyl zadán název kategorie!");
+        }
+        Name = description;
+    }
     public Category(string description, ConsoleColor color, bool income)
     {
 

@@ -32,6 +32,12 @@ public class Account
         var transaction = new Transaction(desc, amount, isIncome, category);
         Transactions.Add(transaction);
     }
+
+    public void AddCategory(string name) 
+    { 
+        Categories.Add(new Category(name));
+    }
+
     public string Name { get; set; }
     public decimal TotalIncome => Transactions
         .Where(t => t.IsIncome == true)

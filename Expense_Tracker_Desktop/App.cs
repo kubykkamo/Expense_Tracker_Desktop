@@ -9,6 +9,7 @@ namespace Expense_Tracker_Desktop
         public App()
         {
             InitializeComponent();
+            
             var loadedTransactions = _storage.LoadTransactions()
                 .OrderByDescending(x => x.Date)
                 .ToList();
@@ -25,7 +26,7 @@ namespace Expense_Tracker_Desktop
 
             cmbSort.DisplayMember = "DisplayName";
 
-            
+
             cmbCategoryFilter.DataSource = _account.Categories;
             cmbCategoryFilter.DisplayMember = "Name";
             cmbCategoryFilter.SelectedIndex = -1;
@@ -33,6 +34,7 @@ namespace Expense_Tracker_Desktop
 
             UpdateData();
             FormatTable();
+            ShowPanel(panelOverview);
 
             dgvTransactions.DataBindingComplete += DgvTransactions_DataBindingComplete;
         }
@@ -47,7 +49,18 @@ namespace Expense_Tracker_Desktop
 
         }
 
+        private void ShowPanel(Panel panelToShow)
+        {
+            Panel[] allPanels = { panelOverview, panelNewCat, panelAddTransaction };
 
+            foreach (var p in allPanels) 
+            {
+                p.Visible = false;
+            }
+
+            panelToShow.Visible = true;
+            panelToShow.BringToFront();
+        }
 
 
         private void label1_Click(object sender, EventArgs e)
@@ -103,14 +116,12 @@ namespace Expense_Tracker_Desktop
         private void NewTransaction_Click(object sender, EventArgs e)
         {
 
-            panelOverview.Visible = false;
-            panelAddTransaction.Visible = true;
+            ShowPanel(panelAddTransaction);
         }
 
         private void Overview_Click(object sender, EventArgs e)
         {
-            panelAddTransaction.Visible = false;
-            panelOverview.Visible = true;
+            ShowPanel(panelOverview);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -137,6 +148,17 @@ namespace Expense_Tracker_Desktop
 
 
 
+        }
+
+        private void VerifyCategory(string desc)
+        {
+            if (string.IsNullOrEmpty(desc))
+            {
+                throw new ArgumentException("Zadej název kategorie!");
+            }
+
+            _account.AddCategory(desc);
+            _storage.SaveCategories(_account.Categories);
         }
 
         private void dgvTransactions_KeyDown_1(object sender, KeyEventArgs e)
@@ -230,7 +252,7 @@ namespace Expense_Tracker_Desktop
             FormatTable();
             cmbCategoryFilter.SelectedIndex = -1;
             cmbSort.SelectedIndex = -1;
-            
+
         }
         public void GenerateTestData()
         {
@@ -291,11 +313,11 @@ namespace Expense_Tracker_Desktop
                 var selectedCategory = cmbCategoryFilter.SelectedItem as Category;
                 var selectedOption = cmbSort.SelectedItem as SortOption;
                 SortType type = SortType.ByDateDesc;
-                if (selectedOption != null) 
+                if (selectedOption != null)
                 {
                     type = selectedOption.Type;
                 }
-                else 
+                else
                 {
                     ErrWin.Show("Nevybral/a jsi druhý filtr!", this);
                 }
@@ -304,11 +326,39 @@ namespace Expense_Tracker_Desktop
                 dgvTransactions.DataSource = transactions;
             }
 
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 ErrWin.Show(ex.Message, this);
             }
-            
+
+        }
+
+        private void label5_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            string desc = txtNewCat.Text;
+
+            try
+            {
+                VerifyCategory(desc);
+                SuccWin.Show("Kategorie byla přidána!", this);
+                ShowPanel(panelOverview);
+            }
+
+            catch (Exception ex)
+            {
+                ErrWin.Show(ex.Message, this);
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            ShowPanel(panelNewCat);
+
         }
     }
 }
