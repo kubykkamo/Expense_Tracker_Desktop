@@ -267,8 +267,8 @@
             // 
             // button3
             // 
-            button3.BackColor = SystemColors.ActiveBorder;
-            button3.Location = new Point(165, 324);
+            button3.BackColor = SystemColors.ButtonFace;
+            button3.Location = new Point(465, 320);
             button3.Name = "button3";
             button3.Size = new Size(138, 33);
             button3.TabIndex = 8;
@@ -279,7 +279,7 @@
             // button2
             // 
             button2.BackColor = SystemColors.ActiveBorder;
-            button2.Location = new Point(550, 333);
+            button2.Location = new Point(165, 322);
             button2.Name = "button2";
             button2.Size = new Size(111, 52);
             button2.TabIndex = 7;
@@ -337,7 +337,7 @@
             // button11
             // 
             button11.BackColor = SystemColors.ActiveBorder;
-            button11.Location = new Point(260, 102);
+            button11.Location = new Point(32, 108);
             button11.Name = "button11";
             button11.Size = new Size(108, 36);
             button11.TabIndex = 23;
@@ -354,9 +354,9 @@
             // 
             // button9
             // 
-            button9.Location = new Point(32, 108);
+            button9.Location = new Point(247, 108);
             button9.Name = "button9";
-            button9.Size = new Size(108, 25);
+            button9.Size = new Size(108, 36);
             button9.TabIndex = 21;
             button9.Text = "Přidat";
             button9.UseVisualStyleBackColor = true;
@@ -378,8 +378,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1300, 749);
             Controls.Add(panelNewCat);
-            Controls.Add(panelAddTransaction);
             Controls.Add(panelOverview);
+            Controls.Add(panelAddTransaction);
             Name = "App";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)dgvTransactions).EndInit();

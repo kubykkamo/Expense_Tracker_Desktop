@@ -13,7 +13,9 @@ public class Category {
   
     public Category() { }
 
-    
+    public override string ToString() => Name;
+
+
 
     public Category(string description) 
     {

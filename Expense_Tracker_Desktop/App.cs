@@ -5,15 +5,17 @@ namespace Expense_Tracker_Desktop
     public partial class App : Form
     {
         private Account _account;
+        private List<Transaction> loadedTransactions;
+        private List<Category> loadedCategories;
         private FileStorageService _storage = new FileStorageService();
         public App()
         {
             InitializeComponent();
 
-            var loadedTransactions = _storage.LoadTransactions()
+            loadedTransactions = _storage.LoadTransactions()
                 .OrderByDescending(x => x.Date)
                 .ToList();
-            var loadedCategories = _storage.LoadCategories();
+            loadedCategories = _storage.LoadCategories();
 
             _account = new Account(loadedTransactions, loadedCategories);
 
@@ -75,6 +77,10 @@ namespace Expense_Tracker_Desktop
             lblBalance.Text = $"Celkový zůstatek: {_account.Balance} Kč.";
             dgvTransactions.DataSource = null;
             dgvTransactions.DataSource = _account.DateOrderedTransactions();
+            cmbCategoryFilter.DataSource = null;
+            cmbCategoryFilter.DataSource = loadedCategories;
+           
+            
         }
 
         private void FormatTable()
@@ -346,6 +352,7 @@ namespace Expense_Tracker_Desktop
             {
                 VerifyCategory(desc);
                 SuccWin.Show("Kategorie byla přidána!", this);
+                UpdateData();
                 ShowPanel(panelOverview);
             }
 
