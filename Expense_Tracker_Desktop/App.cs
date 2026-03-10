@@ -9,7 +9,7 @@ namespace Expense_Tracker_Desktop
         public App()
         {
             InitializeComponent();
-            
+
             var loadedTransactions = _storage.LoadTransactions()
                 .OrderByDescending(x => x.Date)
                 .ToList();
@@ -53,7 +53,7 @@ namespace Expense_Tracker_Desktop
         {
             Panel[] allPanels = { panelOverview, panelNewCat, panelAddTransaction };
 
-            foreach (var p in allPanels) 
+            foreach (var p in allPanels)
             {
                 p.Visible = false;
             }
@@ -360,5 +360,7 @@ namespace Expense_Tracker_Desktop
             ShowPanel(panelNewCat);
 
         }
+
+        
     }
 }

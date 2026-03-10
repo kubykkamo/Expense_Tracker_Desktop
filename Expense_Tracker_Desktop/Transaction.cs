@@ -14,7 +14,7 @@ public class Transaction
     public bool IsIncome { get; set; }
 
     public string CategoryName { get; set; }
-    
+
     private Category _category;
     [JsonIgnore]
     public Category Category
@@ -54,14 +54,4 @@ public class Transaction
 
     public Transaction() { }
 
-    public void PrintTransactionInfo() 
-    {
-        Console.ForegroundColor = Category.Color;
-        string categoryDisplayName = Category?.Name ?? CategoryName ?? "Bez kategorie";
-
-        Console.WriteLine($"{Date.ToShortDateString()} | {Description} | {Amount} Kč | {categoryDisplayName}");
-        Console.ResetColor();
-        
-
-    }
 }

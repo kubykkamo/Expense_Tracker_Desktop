@@ -67,13 +67,12 @@
             // 
             dgvTransactions.AllowUserToAddRows = false;
             dgvTransactions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvTransactions.Location = new Point(45, 104);
-            dgvTransactions.Margin = new Padding(3, 4, 3, 4);
+            dgvTransactions.Location = new Point(39, 78);
             dgvTransactions.MultiSelect = false;
             dgvTransactions.Name = "dgvTransactions";
             dgvTransactions.RowHeadersWidth = 51;
             dgvTransactions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvTransactions.Size = new Size(711, 741);
+            dgvTransactions.Size = new Size(622, 556);
             dgvTransactions.TabIndex = 0;
             dgvTransactions.CellContentClick += dataGridView1_CellContentClick;
             dgvTransactions.KeyDown += dgvTransactions_KeyDown_1;
@@ -82,19 +81,18 @@
             // 
             lblBalance.AutoSize = true;
             lblBalance.Font = new Font("Sitka Display", 14.2499981F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            lblBalance.Location = new Point(111, 31);
+            lblBalance.Location = new Point(97, 23);
             lblBalance.Name = "lblBalance";
-            lblBalance.Size = new Size(94, 35);
+            lblBalance.Size = new Size(74, 28);
             lblBalance.TabIndex = 1;
             lblBalance.Text = "Balance";
             lblBalance.Click += label1_Click;
             // 
             // button1
             // 
-            button1.Location = new Point(777, 104);
-            button1.Margin = new Padding(3, 4, 3, 4);
+            button1.Location = new Point(680, 78);
             button1.Name = "button1";
-            button1.Size = new Size(162, 61);
+            button1.Size = new Size(142, 46);
             button1.TabIndex = 2;
             button1.Text = "Přidat platbu";
             button1.UseVisualStyleBackColor = true;
@@ -115,18 +113,16 @@
             panelOverview.Controls.Add(dgvTransactions);
             panelOverview.Controls.Add(button1);
             panelOverview.Controls.Add(lblBalance);
-            panelOverview.Location = new Point(25, 16);
-            panelOverview.Margin = new Padding(3, 4, 3, 4);
+            panelOverview.Location = new Point(22, 12);
             panelOverview.Name = "panelOverview";
-            panelOverview.Size = new Size(1366, 887);
+            panelOverview.Size = new Size(1195, 665);
             panelOverview.TabIndex = 3;
             // 
             // button10
             // 
-            button10.Location = new Point(1148, 104);
-            button10.Margin = new Padding(3, 4, 3, 4);
+            button10.Location = new Point(1004, 78);
             button10.Name = "button10";
-            button10.Size = new Size(162, 61);
+            button10.Size = new Size(142, 46);
             button10.TabIndex = 21;
             button10.Text = "Přidat kategorii";
             button10.UseVisualStyleBackColor = true;
@@ -134,10 +130,9 @@
             // 
             // button8
             // 
-            button8.Location = new Point(971, 475);
-            button8.Margin = new Padding(3, 4, 3, 4);
+            button8.Location = new Point(850, 356);
             button8.Name = "button8";
-            button8.Size = new Size(141, 39);
+            button8.Size = new Size(123, 29);
             button8.TabIndex = 20;
             button8.Text = "Použít oba filtry";
             button8.UseVisualStyleBackColor = true;
@@ -145,10 +140,9 @@
             // 
             // button7
             // 
-            button7.Location = new Point(1203, 0);
-            button7.Margin = new Padding(3, 4, 3, 4);
+            button7.Location = new Point(1053, 0);
             button7.Name = "button7";
-            button7.Size = new Size(162, 61);
+            button7.Size = new Size(142, 46);
             button7.TabIndex = 19;
             button7.Text = "Test";
             button7.UseVisualStyleBackColor = true;
@@ -156,10 +150,9 @@
             // 
             // button6
             // 
-            button6.Location = new Point(1187, 432);
-            button6.Margin = new Padding(3, 4, 3, 4);
+            button6.Location = new Point(1039, 324);
             button6.Name = "button6";
-            button6.Size = new Size(123, 33);
+            button6.Size = new Size(108, 25);
             button6.TabIndex = 18;
             button6.Text = "Filtrovat";
             button6.UseVisualStyleBackColor = true;
@@ -169,9 +162,9 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            label4.Location = new Point(1155, 343);
+            label4.Location = new Point(1011, 257);
             label4.Name = "label4";
-            label4.Size = new Size(155, 29);
+            label4.Size = new Size(123, 23);
             label4.TabIndex = 17;
             label4.Text = "Filtrovat podle";
             label4.Click += label4_Click_1;
@@ -179,18 +172,16 @@
             // cmbSort
             // 
             cmbSort.FormattingEnabled = true;
-            cmbSort.Location = new Point(1172, 376);
-            cmbSort.Margin = new Padding(3, 4, 3, 4);
+            cmbSort.Location = new Point(1026, 282);
             cmbSort.Name = "cmbSort";
-            cmbSort.Size = new Size(138, 28);
+            cmbSort.Size = new Size(121, 23);
             cmbSort.TabIndex = 16;
             // 
             // button5
             // 
-            button5.Location = new Point(777, 537);
-            button5.Margin = new Padding(3, 4, 3, 4);
+            button5.Location = new Point(680, 403);
             button5.Name = "button5";
-            button5.Size = new Size(123, 33);
+            button5.Size = new Size(108, 25);
             button5.TabIndex = 15;
             button5.Text = "Reset";
             button5.UseVisualStyleBackColor = true;
@@ -198,10 +189,9 @@
             // 
             // button4
             // 
-            button4.Location = new Point(777, 432);
-            button4.Margin = new Padding(3, 4, 3, 4);
+            button4.Location = new Point(680, 324);
             button4.Name = "button4";
-            button4.Size = new Size(123, 33);
+            button4.Size = new Size(108, 25);
             button4.TabIndex = 14;
             button4.Text = "Filtrovat";
             button4.UseVisualStyleBackColor = true;
@@ -210,10 +200,9 @@
             // cmbCategoryFilter
             // 
             cmbCategoryFilter.FormattingEnabled = true;
-            cmbCategoryFilter.Location = new Point(777, 377);
-            cmbCategoryFilter.Margin = new Padding(3, 4, 3, 4);
+            cmbCategoryFilter.Location = new Point(680, 283);
             cmbCategoryFilter.Name = "cmbCategoryFilter";
-            cmbCategoryFilter.Size = new Size(138, 28);
+            cmbCategoryFilter.Size = new Size(121, 23);
             cmbCategoryFilter.TabIndex = 12;
             cmbCategoryFilter.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
@@ -221,9 +210,9 @@
             // 
             filtrovatPodleKategorie.AutoSize = true;
             filtrovatPodleKategorie.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            filtrovatPodleKategorie.Location = new Point(777, 343);
+            filtrovatPodleKategorie.Location = new Point(680, 257);
             filtrovatPodleKategorie.Name = "filtrovatPodleKategorie";
-            filtrovatPodleKategorie.Size = new Size(255, 29);
+            filtrovatPodleKategorie.Size = new Size(203, 23);
             filtrovatPodleKategorie.TabIndex = 10;
             filtrovatPodleKategorie.Text = "Filtrovat podle kategorie";
             filtrovatPodleKategorie.Click += label4_Click;
@@ -239,19 +228,18 @@
             panelAddTransaction.Controls.Add(chckIsIncome);
             panelAddTransaction.Controls.Add(txtAmount);
             panelAddTransaction.Controls.Add(txtDescription);
-            panelAddTransaction.Location = new Point(25, 16);
-            panelAddTransaction.Margin = new Padding(3, 4, 3, 4);
+            panelAddTransaction.Location = new Point(22, 12);
             panelAddTransaction.Name = "panelAddTransaction";
-            panelAddTransaction.Size = new Size(1090, 673);
+            panelAddTransaction.Size = new Size(954, 505);
             panelAddTransaction.TabIndex = 4;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            label3.Location = new Point(189, 316);
+            label3.Location = new Point(165, 237);
             label3.Name = "label3";
-            label3.Size = new Size(105, 29);
+            label3.Size = new Size(84, 23);
             label3.TabIndex = 11;
             label3.Text = "Kategorie";
             label3.Click += label3_Click;
@@ -260,9 +248,9 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            label2.Location = new Point(189, 219);
+            label2.Location = new Point(165, 164);
             label2.Name = "label2";
-            label2.Size = new Size(77, 29);
+            label2.Size = new Size(63, 23);
             label2.TabIndex = 10;
             label2.Text = "Částka";
             // 
@@ -270,9 +258,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            label1.Location = new Point(189, 104);
+            label1.Location = new Point(165, 78);
             label1.Name = "label1";
-            label1.Size = new Size(62, 29);
+            label1.Size = new Size(48, 23);
             label1.TabIndex = 9;
             label1.Text = "Popis";
             label1.Click += label1_Click_1;
@@ -280,10 +268,9 @@
             // button3
             // 
             button3.BackColor = SystemColors.ActiveBorder;
-            button3.Location = new Point(189, 432);
-            button3.Margin = new Padding(3, 4, 3, 4);
+            button3.Location = new Point(165, 324);
             button3.Name = "button3";
-            button3.Size = new Size(158, 44);
+            button3.Size = new Size(138, 33);
             button3.TabIndex = 8;
             button3.Text = "Uložit platbu";
             button3.UseVisualStyleBackColor = false;
@@ -292,10 +279,9 @@
             // button2
             // 
             button2.BackColor = SystemColors.ActiveBorder;
-            button2.Location = new Point(629, 444);
-            button2.Margin = new Padding(3, 4, 3, 4);
+            button2.Location = new Point(550, 333);
             button2.Name = "button2";
-            button2.Size = new Size(127, 69);
+            button2.Size = new Size(111, 52);
             button2.TabIndex = 7;
             button2.Text = "Zpět";
             button2.UseVisualStyleBackColor = false;
@@ -304,20 +290,18 @@
             // cmbCategory
             // 
             cmbCategory.FormattingEnabled = true;
-            cmbCategory.Location = new Point(189, 351);
-            cmbCategory.Margin = new Padding(3, 4, 3, 4);
+            cmbCategory.Location = new Point(165, 263);
             cmbCategory.Name = "cmbCategory";
-            cmbCategory.Size = new Size(138, 28);
+            cmbCategory.Size = new Size(121, 23);
             cmbCategory.TabIndex = 6;
             cmbCategory.SelectedIndexChanged += txtCategory_SelectedIndexChanged;
             // 
             // chckIsIncome
             // 
             chckIsIncome.AutoSize = true;
-            chckIsIncome.Location = new Point(345, 259);
-            chckIsIncome.Margin = new Padding(3, 4, 3, 4);
+            chckIsIncome.Location = new Point(302, 194);
             chckIsIncome.Name = "chckIsIncome";
-            chckIsIncome.Size = new Size(80, 24);
+            chckIsIncome.Size = new Size(65, 19);
             chckIsIncome.TabIndex = 5;
             chckIsIncome.Text = "Příjem?";
             chckIsIncome.UseVisualStyleBackColor = true;
@@ -325,18 +309,16 @@
             // 
             // txtAmount
             // 
-            txtAmount.Location = new Point(189, 253);
-            txtAmount.Margin = new Padding(3, 4, 3, 4);
+            txtAmount.Location = new Point(165, 190);
             txtAmount.Name = "txtAmount";
-            txtAmount.Size = new Size(114, 27);
+            txtAmount.Size = new Size(100, 23);
             txtAmount.TabIndex = 4;
             // 
             // txtDescription
             // 
-            txtDescription.Location = new Point(189, 144);
-            txtDescription.Margin = new Padding(3, 4, 3, 4);
+            txtDescription.Location = new Point(165, 108);
             txtDescription.Name = "txtDescription";
-            txtDescription.Size = new Size(381, 27);
+            txtDescription.Size = new Size(334, 23);
             txtDescription.TabIndex = 1;
             txtDescription.TextChanged += textBox1_TextChanged;
             // 
@@ -346,59 +328,58 @@
             panelNewCat.Controls.Add(txtNewCat);
             panelNewCat.Controls.Add(button9);
             panelNewCat.Controls.Add(label5);
-            panelNewCat.Location = new Point(520, 393);
+            panelNewCat.Location = new Point(455, 295);
+            panelNewCat.Margin = new Padding(3, 2, 3, 2);
             panelNewCat.Name = "panelNewCat";
-            panelNewCat.Size = new Size(447, 213);
+            panelNewCat.Size = new Size(391, 160);
             panelNewCat.TabIndex = 24;
             // 
             // button11
             // 
             button11.BackColor = SystemColors.ActiveBorder;
-            button11.Location = new Point(36, 151);
-            button11.Margin = new Padding(3, 4, 3, 4);
+            button11.Location = new Point(260, 102);
             button11.Name = "button11";
-            button11.Size = new Size(111, 33);
+            button11.Size = new Size(108, 36);
             button11.TabIndex = 23;
             button11.Text = "Zpět";
             button11.UseVisualStyleBackColor = false;
+            button11.Click += Overview_Click;
             // 
             // txtNewCat
             // 
-            txtNewCat.Location = new Point(36, 73);
-            txtNewCat.Margin = new Padding(3, 4, 3, 4);
+            txtNewCat.Location = new Point(32, 55);
             txtNewCat.Name = "txtNewCat";
-            txtNewCat.Size = new Size(206, 27);
+            txtNewCat.Size = new Size(181, 23);
             txtNewCat.TabIndex = 22;
             // 
             // button9
             // 
-            button9.Location = new Point(274, 151);
-            button9.Margin = new Padding(3, 4, 3, 4);
+            button9.Location = new Point(32, 108);
             button9.Name = "button9";
-            button9.Size = new Size(123, 33);
+            button9.Size = new Size(108, 25);
             button9.TabIndex = 21;
             button9.Text = "Přidat";
             button9.UseVisualStyleBackColor = true;
+            button9.Click += button9_Click;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            label5.Location = new Point(36, 40);
+            label5.Location = new Point(32, 30);
             label5.Name = "label5";
-            label5.Size = new Size(172, 29);
+            label5.Size = new Size(138, 23);
             label5.TabIndex = 21;
             label5.Text = "Název kategorie";
             // 
             // App
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1486, 999);
+            ClientSize = new Size(1300, 749);
             Controls.Add(panelNewCat);
             Controls.Add(panelAddTransaction);
             Controls.Add(panelOverview);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "App";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)dgvTransactions).EndInit();
