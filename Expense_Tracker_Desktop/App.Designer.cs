@@ -32,11 +32,7 @@
             lblBalance = new Label();
             button1 = new Button();
             panelOverview = new Panel();
-            panelNewCat = new Panel();
-            button11 = new Button();
-            txtNewCat = new TextBox();
-            button9 = new Button();
-            label5 = new Label();
+            button12 = new Button();
             lblTotalOutcome = new Label();
             button10 = new Button();
             button8 = new Button();
@@ -58,10 +54,8 @@
             chckIsIncome = new CheckBox();
             txtAmount = new TextBox();
             txtDescription = new TextBox();
-            button12 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvTransactions).BeginInit();
             panelOverview.SuspendLayout();
-            panelNewCat.SuspendLayout();
             panelAddTransaction.SuspendLayout();
             SuspendLayout();
             // 
@@ -76,7 +70,9 @@
             dgvTransactions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvTransactions.Size = new Size(622, 556);
             dgvTransactions.TabIndex = 0;
+            dgvTransactions.CellBeginEdit += dgvTransactions_CellBeginEdit;
             dgvTransactions.CellContentClick += dataGridView1_CellContentClick;
+            dgvTransactions.CellEndEdit += dgvTransactions_CellEndEdit;
             dgvTransactions.KeyDown += dgvTransactions_KeyDown_1;
             // 
             // lblBalance
@@ -116,61 +112,20 @@
             panelOverview.Controls.Add(dgvTransactions);
             panelOverview.Controls.Add(button1);
             panelOverview.Controls.Add(lblBalance);
-            panelOverview.Controls.Add(panelNewCat);
             panelOverview.Location = new Point(22, 12);
             panelOverview.Name = "panelOverview";
             panelOverview.Size = new Size(1195, 665);
             panelOverview.TabIndex = 3;
             // 
-            // panelNewCat
+            // button12
             // 
-            panelNewCat.Controls.Add(button11);
-            panelNewCat.Controls.Add(txtNewCat);
-            panelNewCat.Controls.Add(button9);
-            panelNewCat.Controls.Add(label5);
-            panelNewCat.Location = new Point(453, 268);
-            panelNewCat.Margin = new Padding(3, 2, 3, 2);
-            panelNewCat.Name = "panelNewCat";
-            panelNewCat.Size = new Size(391, 160);
-            panelNewCat.TabIndex = 24;
-            // 
-            // button11
-            // 
-            button11.BackColor = SystemColors.ActiveBorder;
-            button11.Location = new Point(32, 108);
-            button11.Name = "button11";
-            button11.Size = new Size(108, 36);
-            button11.TabIndex = 23;
-            button11.Text = "Zpět";
-            button11.UseVisualStyleBackColor = false;
-            button11.Click += Overview_Click;
-            // 
-            // txtNewCat
-            // 
-            txtNewCat.Location = new Point(32, 55);
-            txtNewCat.Name = "txtNewCat";
-            txtNewCat.Size = new Size(181, 23);
-            txtNewCat.TabIndex = 22;
-            // 
-            // button9
-            // 
-            button9.Location = new Point(247, 108);
-            button9.Name = "button9";
-            button9.Size = new Size(108, 36);
-            button9.TabIndex = 21;
-            button9.Text = "Přidat";
-            button9.UseVisualStyleBackColor = true;
-            button9.Click += button9_Click;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            label5.Location = new Point(32, 30);
-            label5.Name = "label5";
-            label5.Size = new Size(138, 23);
-            label5.TabIndex = 21;
-            label5.Text = "Název kategorie";
+            button12.Location = new Point(680, 594);
+            button12.Name = "button12";
+            button12.Size = new Size(142, 40);
+            button12.TabIndex = 25;
+            button12.Text = "Uložit";
+            button12.UseVisualStyleBackColor = true;
+            button12.Click += button12_Click;
             // 
             // lblTotalOutcome
             // 
@@ -184,7 +139,7 @@
             // 
             // button10
             // 
-            button10.Location = new Point(1004, 78);
+            button10.Location = new Point(680, 130);
             button10.Name = "button10";
             button10.Size = new Size(142, 46);
             button10.TabIndex = 21;
@@ -204,9 +159,9 @@
             // 
             // button7
             // 
-            button7.Location = new Point(1053, 619);
+            button7.Location = new Point(1111, 643);
             button7.Name = "button7";
-            button7.Size = new Size(142, 46);
+            button7.Size = new Size(84, 22);
             button7.TabIndex = 19;
             button7.Text = "Test";
             button7.UseVisualStyleBackColor = true;
@@ -226,7 +181,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            label4.Location = new Point(1023, 257);
+            label4.Location = new Point(1026, 257);
             label4.Name = "label4";
             label4.Size = new Size(123, 23);
             label4.TabIndex = 17;
@@ -379,16 +334,6 @@
             txtDescription.Size = new Size(334, 23);
             txtDescription.TabIndex = 1;
             // 
-            // button12
-            // 
-            button12.Location = new Point(680, 594);
-            button12.Name = "button12";
-            button12.Size = new Size(142, 40);
-            button12.TabIndex = 25;
-            button12.Text = "Uložit";
-            button12.UseVisualStyleBackColor = true;
-            button12.Click += button12_Click;
-            // 
             // App
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -397,12 +342,11 @@
             Controls.Add(panelOverview);
             Controls.Add(panelAddTransaction);
             Name = "App";
-            Text = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Expense Tracker";
             ((System.ComponentModel.ISupportInitialize)dgvTransactions).EndInit();
             panelOverview.ResumeLayout(false);
             panelOverview.PerformLayout();
-            panelNewCat.ResumeLayout(false);
-            panelNewCat.PerformLayout();
             panelAddTransaction.ResumeLayout(false);
             panelAddTransaction.PerformLayout();
             ResumeLayout(false);
@@ -434,11 +378,6 @@
         private Button button7;
         private Button button8;
         private Button button10;
-        private Panel panelNewCat;
-        private Button button11;
-        private TextBox txtNewCat;
-        private Button button9;
-        private Label label5;
         private Label lblTotalOutcome;
         private Button button12;
     }

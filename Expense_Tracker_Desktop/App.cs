@@ -27,10 +27,11 @@ namespace Expense_Tracker_Desktop
             cmbSort.Items.Add(new SortOption { DisplayName = "Od nejstarší", Type = SortType.ByDateAsc });
 
             cmbSort.DisplayMember = "DisplayName";
-
+            cmbCategoryFilter.SelectedIndex = -1;
             cmbCategoryFilter.DataSource = _account.Categories;
             cmbCategoryFilter.DisplayMember = "Name";
-            cmbCategoryFilter.SelectedIndex = -1;
+            
+            
             cmbSort.SelectedIndex = -1;
 
             UpdateData();
@@ -75,9 +76,31 @@ namespace Expense_Tracker_Desktop
 
         }
 
+        private void dgvTransactions_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            // Zkontrolujeme, jestli uživatel kliknul zrovna do sloupce s částkou
+            if (dgvTransactions.Columns[e.ColumnIndex].Name == "Amount")
+            {
+                // Sundáme formátování. Uživatel teď uvidí a bude editovat jen čisté číslo (např. 500)
+                dgvTransactions.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.Format = "0";
+            }
+        }
+
+        private void dgvTransactions_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            // Když uživatel dopíše a zmáčkne Enter nebo klikne jinam
+            if (dgvTransactions.Columns[e.ColumnIndex].Name == "Amount")
+            {
+                // Podíváme se do skrytého sloupce, jestli je to příjem nebo výdaj
+                bool isIncome = (bool)dgvTransactions.Rows[e.RowIndex].Cells["IsIncome"].Value;
+
+                // A vrátíme tam zpátky tu naši hezkou masku se znaménkem a Kč
+                dgvTransactions.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.Format = isIncome ? "+ #,##0 Kč" : "- #,##0 Kč";
+            }
+        }
         private void ShowPanel(Panel panelToShow)
         {
-            Panel[] allPanels = { panelOverview, panelNewCat, panelAddTransaction };
+            Panel[] allPanels = { panelOverview, panelAddTransaction };
 
             foreach (var p in allPanels)
             {
@@ -204,7 +227,7 @@ namespace Expense_Tracker_Desktop
 
         }
 
-        private void VerifyCategory(string desc)
+        public void VerifyCategory(string desc)
         {
             if (string.IsNullOrEmpty(desc))
             {
@@ -375,27 +398,34 @@ namespace Expense_Tracker_Desktop
 
         }
 
-        private void button9_Click(object sender, EventArgs e)
-        {
-            string desc = txtNewCat.Text;
-
-            try
-            {
-                VerifyCategory(desc);
-                SuccWin.Show("Kategorie byla přidána!", this);
-                UpdateData();
-                ShowPanel(panelOverview);
-            }
-
-            catch (Exception ex)
-            {
-                ErrWin.Show(ex.Message, this);
-            }
-        }
+        
 
         private void button10_Click(object sender, EventArgs e)
         {
-            ShowPanel(panelNewCat);
+            // 1. Vytvoříme instanci okna
+            using (var dialog = new AddCategoryForm())
+            {
+                // 2. Zobrazíme ho a počkáme, až ho uživatel zavře tlačítkem OK
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    // 3. Přečteme si název z dialogu a přidáme kategorii
+                    string name = dialog.CategoryName;
+
+                    try
+                    {
+
+                       VerifyCategory(name);
+
+                        // Aktualizujeme data a ComboBoxy
+                        UpdateData();
+                        SuccWin.Show("Kategorie přidána!", this);
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        ErrWin.Show(ex.Message, this);
+                    }
+                }
+            }
 
         }
 
@@ -405,12 +435,17 @@ namespace Expense_Tracker_Desktop
             {
                 _storage.SaveCategories(_account.Categories);
                 _storage.SaveTransactions(_account.Transactions);
-                SuccWin.Show("Tvá data byla úspešně uložen.", this);
+                SuccWin.Show("Tvá data byla úspešně uložena.", this);
             }
-            catch (ArgumentException ex) 
+            catch (ArgumentException ex)
             {
                 ErrWin.Show(ex.Message, this);
             }
+        }
+
+        private void panelNewCat_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
