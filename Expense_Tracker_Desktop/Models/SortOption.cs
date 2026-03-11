@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Expense_Tracker_Desktop;
+namespace Expense_Tracker_Desktop.Models;
 
 public class SortOption 
 { 

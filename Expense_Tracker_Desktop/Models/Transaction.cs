@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Xml.Linq;
 
-namespace Expense_Tracker_Desktop;
+namespace Expense_Tracker_Desktop.Models;
 
 public class Transaction
 {

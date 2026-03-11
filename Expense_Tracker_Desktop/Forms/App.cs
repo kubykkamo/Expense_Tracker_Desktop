@@ -1,3 +1,5 @@
+using Expense_Tracker_Desktop.Models;
+using Expense_Tracker_Desktop.Services;
 using System.Diagnostics.PerformanceData;
 
 namespace Expense_Tracker_Desktop

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
-namespace Expense_Tracker_Desktop;
+namespace Expense_Tracker_Desktop.Models;
 
 
 public class Category {

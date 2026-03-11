@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Principal;
@@ -7,7 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Transactions;
 
-namespace Expense_Tracker_Desktop;
+namespace Expense_Tracker_Desktop.Models;
 
 public class Account
 {

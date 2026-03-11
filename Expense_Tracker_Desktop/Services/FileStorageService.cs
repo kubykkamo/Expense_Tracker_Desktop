@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Expense_Tracker_Desktop;
+namespace Expense_Tracker_Desktop.Services;
 
+using Expense_Tracker_Desktop.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;

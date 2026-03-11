@@ -1,4 +1,4 @@
-namespace Expense_Tracker_Desktop
+namespace Expense_Tracker_Desktop.Services
 {
     internal static class Program
     {
