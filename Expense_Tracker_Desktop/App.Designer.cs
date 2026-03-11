@@ -58,6 +58,7 @@
             chckIsIncome = new CheckBox();
             txtAmount = new TextBox();
             txtDescription = new TextBox();
+            button12 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvTransactions).BeginInit();
             panelOverview.SuspendLayout();
             panelNewCat.SuspendLayout();
@@ -100,7 +101,7 @@
             // 
             // panelOverview
             // 
-            panelOverview.Controls.Add(panelNewCat);
+            panelOverview.Controls.Add(button12);
             panelOverview.Controls.Add(lblTotalOutcome);
             panelOverview.Controls.Add(button10);
             panelOverview.Controls.Add(button8);
@@ -115,6 +116,7 @@
             panelOverview.Controls.Add(dgvTransactions);
             panelOverview.Controls.Add(button1);
             panelOverview.Controls.Add(lblBalance);
+            panelOverview.Controls.Add(panelNewCat);
             panelOverview.Location = new Point(22, 12);
             panelOverview.Name = "panelOverview";
             panelOverview.Size = new Size(1195, 665);
@@ -202,7 +204,7 @@
             // 
             // button7
             // 
-            button7.Location = new Point(1053, 0);
+            button7.Location = new Point(1053, 619);
             button7.Name = "button7";
             button7.Size = new Size(142, 46);
             button7.TabIndex = 19;
@@ -377,6 +379,16 @@
             txtDescription.Size = new Size(334, 23);
             txtDescription.TabIndex = 1;
             // 
+            // button12
+            // 
+            button12.Location = new Point(680, 594);
+            button12.Name = "button12";
+            button12.Size = new Size(142, 40);
+            button12.TabIndex = 25;
+            button12.Text = "Uložit";
+            button12.UseVisualStyleBackColor = true;
+            button12.Click += button12_Click;
+            // 
             // App
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -428,5 +440,6 @@
         private Button button9;
         private Label label5;
         private Label lblTotalOutcome;
+        private Button button12;
     }
 }

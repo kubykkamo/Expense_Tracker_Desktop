@@ -18,7 +18,7 @@ namespace Expense_Tracker_Desktop
             loadedCategories = _storage.LoadCategories();
 
             _account = new Account(loadedTransactions, loadedCategories);
-// Combo boxes --------------------------
+            // Combo boxes --------------------------
             cmbSort.Items.Add(new SortOption { DisplayName = "Od nejdražší", Type = SortType.ByAmountDesc });
             cmbSort.Items.Add(new SortOption { DisplayName = "Od nejlevnější", Type = SortType.ByAmountAsc });
             cmbSort.Items.Add(new SortOption { DisplayName = "Podle abecedy A-Z", Type = SortType.ByNameAsc });
@@ -27,17 +27,17 @@ namespace Expense_Tracker_Desktop
             cmbSort.Items.Add(new SortOption { DisplayName = "Od nejstarší", Type = SortType.ByDateAsc });
 
             cmbSort.DisplayMember = "DisplayName";
- 
+
             cmbCategoryFilter.DataSource = _account.Categories;
             cmbCategoryFilter.DisplayMember = "Name";
             cmbCategoryFilter.SelectedIndex = -1;
             cmbSort.SelectedIndex = -1;
 
             UpdateData();
-            
+
             ShowPanel(panelOverview);
 
-           
+
             // 1. Roztáhnutí sloupců přes celou šířku okna
             dgvTransactions.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvTransactions.EnableHeadersVisualStyles = false;
@@ -51,11 +51,11 @@ namespace Expense_Tracker_Desktop
             // 4. Větší výška řádků, aby text nebyl tak namačkaný (tabulka bude dýchat)
             dgvTransactions.RowTemplate.Height = 40;
 
-           
+
             dgvTransactions.DefaultCellStyle.SelectionBackColor = Color.FromArgb(220, 226, 230);
             dgvTransactions.DefaultCellStyle.SelectionForeColor = Color.Black;
-          
-            
+
+
             dgvTransactions.EnableHeadersVisualStyles = false;
             dgvTransactions.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvTransactions.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(245, 247, 250);
@@ -90,14 +90,14 @@ namespace Expense_Tracker_Desktop
 
         private void UpdateData()
         {
-            lblTotalOutcome.Text = $"Celková utrata {_account.TotalOutcome} Kč.";
+            lblTotalOutcome.Text = $"Celková útrata {_account.TotalOutcome} Kč.";
             lblBalance.Text = $"Celkový zůstatek: {_account.Balance} Kč.";
             dgvTransactions.DataSource = null;
             dgvTransactions.DataSource = _account.DateOrderedTransactions();
             cmbCategoryFilter.DataSource = null;
             cmbCategoryFilter.DataSource = loadedCategories;
-           
-            
+
+
         }
 
         private void FormatTable()
@@ -133,7 +133,7 @@ namespace Expense_Tracker_Desktop
             dgvTransactions.Columns["CategoryName"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             // ... zbytek tvého kódu s barvami a znaménky
-        
+
 
             DateTime? lastDate = null;
             bool useAlternateColor = false;
@@ -327,21 +327,21 @@ namespace Expense_Tracker_Desktop
 
         private void SortTransactions_Click(object sender, EventArgs e)
         {
-            
-                var selectedOption = cmbSort.SelectedItem as SortOption;
-                if (selectedOption == null) 
-                {
-                    ErrWin.Show("Nebyl vybrán žádný filtr!", this);
-                    return;
-                }
 
-                var transactions = _account.GetSortedTransactions(selectedOption.Type, _account.Transactions);
+            var selectedOption = cmbSort.SelectedItem as SortOption;
+            if (selectedOption == null)
+            {
+                ErrWin.Show("Nebyl vybrán žádný filtr!", this);
+                return;
+            }
 
-                dgvTransactions.DataSource = transactions;
+            var transactions = _account.GetSortedTransactions(selectedOption.Type, _account.Transactions);
+
+            dgvTransactions.DataSource = transactions;
         }
 
-            
-        
+
+
 
         private void TestData_Click(object sender, EventArgs e)
         {
@@ -399,6 +399,18 @@ namespace Expense_Tracker_Desktop
 
         }
 
-        
+        private void button12_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _storage.SaveCategories(_account.Categories);
+                _storage.SaveTransactions(_account.Transactions);
+                SuccWin.Show("Tvá data byla úspešně uložen.", this);
+            }
+            catch (ArgumentException ex) 
+            {
+                ErrWin.Show(ex.Message, this);
+            }
+        }
     }
 }
