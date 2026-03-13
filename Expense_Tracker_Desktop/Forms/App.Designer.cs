@@ -62,6 +62,7 @@
             // dgvTransactions
             // 
             dgvTransactions.AllowUserToAddRows = false;
+            dgvTransactions.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvTransactions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvTransactions.Location = new Point(39, 78);
             dgvTransactions.MultiSelect = false;
@@ -153,7 +154,7 @@
             button8.Name = "button8";
             button8.Size = new Size(123, 29);
             button8.TabIndex = 20;
-            button8.Text = "Použít oba filtry";
+            button8.Text = "Filtrovat a seřadit";
             button8.UseVisualStyleBackColor = true;
             button8.Click += TwoFilters_Click;
             // 
@@ -173,7 +174,7 @@
             button6.Name = "button6";
             button6.Size = new Size(108, 25);
             button6.TabIndex = 18;
-            button6.Text = "Filtrovat";
+            button6.Text = "Seřadit";
             button6.UseVisualStyleBackColor = true;
             button6.Click += SortTransactions_Click;
             // 
@@ -183,9 +184,9 @@
             label4.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
             label4.Location = new Point(1026, 257);
             label4.Name = "label4";
-            label4.Size = new Size(123, 23);
+            label4.Size = new Size(114, 23);
             label4.TabIndex = 17;
-            label4.Text = "Filtrovat podle";
+            label4.Text = "Seřadit podle";
             label4.Click += label4_Click_1;
             // 
             // cmbSort
@@ -202,7 +203,7 @@
             button5.Name = "button5";
             button5.Size = new Size(108, 25);
             button5.TabIndex = 15;
-            button5.Text = "Reset";
+            button5.Text = "Resetovat filtry";
             button5.UseVisualStyleBackColor = true;
             button5.Click += button5_Click;
             // 
@@ -309,6 +310,7 @@
             cmbCategory.Name = "cmbCategory";
             cmbCategory.Size = new Size(121, 23);
             cmbCategory.TabIndex = 6;
+            cmbCategory.SelectedIndexChanged += cmbCategory_SelectedIndexChanged;
             // 
             // chckIsIncome
             // 
@@ -339,8 +341,8 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1300, 749);
-            Controls.Add(panelOverview);
             Controls.Add(panelAddTransaction);
+            Controls.Add(panelOverview);
             Name = "App";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Expense Tracker";

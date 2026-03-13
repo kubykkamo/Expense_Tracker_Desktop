@@ -29,11 +29,11 @@ namespace Expense_Tracker_Desktop
             cmbSort.Items.Add(new SortOption { DisplayName = "Od nejstarší", Type = SortType.ByDateAsc });
 
             cmbSort.DisplayMember = "DisplayName";
-            cmbCategoryFilter.SelectedIndex = -1;
-            cmbCategoryFilter.DataSource = _account.Categories;
             cmbCategoryFilter.DisplayMember = "Name";
-            
-            
+            cmbCategory.SelectedIndex = -1;
+            cmbCategory.DataSource = loadedCategories;
+
+
             cmbSort.SelectedIndex = -1;
 
             UpdateData();
@@ -115,12 +115,13 @@ namespace Expense_Tracker_Desktop
 
         private void UpdateData()
         {
-            lblTotalOutcome.Text = $"Celková útrata {_account.TotalOutcome} Kč.";
+            lblTotalOutcome.Text = $"Celková útrata: {_account.TotalOutcome} Kč.";
             lblBalance.Text = $"Celkový zůstatek: {_account.Balance} Kč.";
             dgvTransactions.DataSource = null;
             dgvTransactions.DataSource = _account.DateOrderedTransactions();
             cmbCategoryFilter.DataSource = null;
             cmbCategoryFilter.DataSource = loadedCategories;
+            cmbCategoryFilter.SelectedIndex = -1;
 
 
         }
@@ -400,7 +401,7 @@ namespace Expense_Tracker_Desktop
 
         }
 
-        
+
 
         private void button10_Click(object sender, EventArgs e)
         {
@@ -416,7 +417,7 @@ namespace Expense_Tracker_Desktop
                     try
                     {
 
-                       VerifyCategory(name);
+                        VerifyCategory(name);
 
                         // Aktualizujeme data a ComboBoxy
                         UpdateData();
@@ -446,6 +447,11 @@ namespace Expense_Tracker_Desktop
         }
 
         private void panelNewCat_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void cmbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
